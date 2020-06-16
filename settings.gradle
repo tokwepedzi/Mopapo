@@ -1,0 +1,2 @@
+rootProject.name='mopapov2'
+include ':app'

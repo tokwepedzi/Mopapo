@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ClientsMenuItems.verification">
+
+
+    <TextView
+        android:id="@+id/clientFullNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Client's full name" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fullNameEditText"
+        android:layout_weight="1"
+        android:ems="28"
+        android:textAlignment="textStart"
+        android:textSize="12sp"/>
+
+
+
+    <TextView
+        android:id="@+id/clientIdNumTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Client's ID number" />
+
+    <EditText
+        android:id="@+id/idNumEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="28"
+        android:textAlignment="textStart"
+        android:textSize="12sp"/>
+
+
+
+    <TextView
+        android:id="@+id/clientcellNumTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Client's cell number" />
+
+    <EditText
+        android:id="@+id/clientcellNumEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="28"
+        android:textAlignment="textStart"
+        android:textSize="12sp"/>
+
+
+
+    <TextView
+        android:id="@+id/clientPhysicalAddressTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Client's physical address" />
+
+    <EditText
+        android:id="@+id/physicalAddressEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="28"
+        android:textAlignment="textStart"
+        android:textSize="12sp"/>
+
+
+
+    <TextView
+        android:id="@+id/groupNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Group name" />
+
+    <EditText
+        android:id="@+id/groupNameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="28"
+        android:textAlignment="textStart"
+        android:textSize="12sp"/>
+
+
+
+    <TextView
+        android:id="@+id/collateralItemsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Client's collateral items" />
+
+    <EditText
+        android:id="@+id/collateralItemsEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="28"
+        android:textAlignment="textStart"
+        android:textSize="12sp"/>
+
+
+
+    <TextView
+        android:id="@+id/nextOfKinTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next of kin's name"
+        android:height="15dp"/>
+
+    <EditText
+        android:id="@+id/nextOfKinEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="28"
+        android:textAlignment="textStart"
+        android:textSize="12sp"/>
+
+
+
+    <TextView
+        android:id="@+id/nextOfKinAddressTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next of kin's address"
+        android:height="15dp"/>
+
+    <EditText
+        android:id="@+id/nextOfKinAddressEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="28"
+        android:textAlignment="textStart"
+        android:textSize="12sp" />
+
+
+
+    <TextView
+        android:id="@+id/nextOfKinCellTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next of kin's cell number"
+        android:height="15dp"/>
+
+    <EditText
+        android:id="@+id/nextOfKinCellNumEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="28"
+        android:textAlignment="textStart"
+        android:textSize="12sp"/>
+
+
+    <Button
+        android:id="@+id/verificationFormSaveBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save" />
+
+
+</LinearLayout>

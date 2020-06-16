@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="setup_welcome">
+        <item>
+             Welcome!
+        </item>
+
+        <item>
+            ..thank you..
+        </item>
+        <item>
+            ..for choosing..
+        </item>
+        <item>
+            ..MoPaPo (Mobile Pay Point)
+        </item>
+    </string-array>
+</resources>

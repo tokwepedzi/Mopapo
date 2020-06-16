@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_list"
+    android:id="@+id/welcome_layout"
+    android:orientation="vertical"
+    tools:context=".DeviceConfig.WelcomenSetup">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/welcomeMsgCrdVw"
+        android:layout_width="427dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="1dp"
+        app:cardBackgroundColor="#FFEBEE"
+        app:cardCornerRadius="35dp">
+
+        <RelativeLayout
+            android:id="@+id/WelcomeMsgRelLyot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <com.tomer.fadingtextview.FadingTextView
+                android:id="@+id/welcome_faingMsgTxtVw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Welcome!"
+                android:textColor="#3549BC"
+                android:textSize="22sp"
+                app:texts="@array/setup_welcome"
+                app:timeout="2000" />
+
+            <!--<TextView
+                android:id="@+id/welcomeMsgTxtVw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Welcome!"
+                android:textColor="#3549BC"
+                android:textSize="30sp" />-->
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/setupDvcTxtVw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:text="...lets set up your device."
+        android:layout_gravity="center"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        />
+
+    <Button
+        android:id="@+id/selectIndstryBtn"
+        android:layout_width="210dp"
+        android:layout_height="50dp"
+        android:text="Select your industry"
+        android:textColor="#000000"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"/>
+
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        android:id="@+id/selectOrgSearchbleSpinner"
+        android:layout_width="210dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:background="#FFFF"
+
+        app:hintText="Select your organization" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="Industry:"
+        android:layout_marginStart="10dp"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/industryTxtVw"
+        android:layout_width="300dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="10dp"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"/>
+
+
+
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Company:"
+        android:textColor="#FFFFFF"
+        android:layout_marginStart="10dp"
+        android:textSize="12sp"/>
+    <TextView
+        android:id="@+id/companyNameTxtVw"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"/>
+
+    <ProgressBar
+        android:id="@+id/deciceSetUpProgressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:outlineSpotShadowColor="#FFFFFF"
+        android:progressTint="#FFFFFF"
+        android:visibility="invisible"/>
+
+
+    <Button
+        android:id="@+id/setupScreenNextBtn"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:text="Next"
+        android:layout_marginTop="5dp"/>
+
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--
+        <androidx.cardview.widget.CardView
+            android:id="@+id/welcomeMsgCrdVw"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="1dp"
+            app:cardBackgroundColor="#3549BC"
+            app:cardCornerRadius="25dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/WelcomeMsgRelLyot">
+
+                <TextView
+                    android:id="@+id/welcomeMsgTxtVw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Welcome!"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp" />
+
+            </RelativeLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/setupDvcTxtVw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="...lets set up your device."
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textSize="12sp"
+           />
+
+        <TextView
+            android:id="@+id/selectYrIndstryTxtVw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Select your industry"
+            android:textAlignment="center"
+            android:textSize="25sp" />
+
+        <CheckedTextView
+            android:id="@+id/microFinanceIndTxtVw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:checkMark="?android:attr/listChoiceIndicatorSingle"
+            android:checkMarkTint="#090909"
+            android:checked="false"
+            android:text="Microfinance"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:visibility="visible"
+            tools:visibility="visible" />
+
+
+        <CheckedTextView
+            android:id="@+id/retail-Mini-BarIndTxtVw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:checkMark="?android:attr/listChoiceIndicatorSingle"
+            android:checkMarkTint="#090909"
+            android:checked="false"
+            android:gravity="center"
+            android:text="Retail-mini/Bar"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:visibility="visible"
+            tools:visibility="visible" />
+
+        <CheckedTextView
+            android:id="@+id/publicTransprtIndTxtVw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:checkMark="?android:attr/listChoiceIndicatorSingle"
+            android:checkMarkTint="#090909"
+            android:checked="false"
+            android:text="Public transport"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:visibility="visible"
+            tools:visibility="visible" />
+
+        <CheckedTextView
+            android:id="@+id/healthNMedIndTxtVw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:checkMark="?android:attr/listChoiceIndicatorSingle"
+            android:checkMarkTint="#090909"
+            android:checked="false"
+            android:text="Health and Medicine"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <CheckedTextView
+            android:id="@+id/distNSupplyIndtxtVw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:checkMark="?android:attr/listChoiceIndicatorSingle"
+            android:checkMarkTint="#090909"
+            android:checked="false"
+            android:gravity="center"
+            android:text="Distribution and Supply"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <CheckedTextView
+            android:id="@+id/sportsNEnterIndTxtVw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:checkMark="?android:attr/listChoiceIndicatorSingle"
+            android:checkMarkTint="#090909"
+            android:checked="false"
+            android:text="Sports and Entertainment"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:visibility="visible"
+            tools:visibility="visible" />
+
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/selectYrOrgSpinner"
+            android:layout_width="281dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="#FFFFFF"
+            android:textAlignment="center"
+            app:hintText="Select your organization"
+            />
+
+        <Button
+            android:id="@+id/nxtBtn"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:text="Next"
+            android:layout_marginTop="10dp"/>
+
+        <ProgressBar
+            android:id="@+id/deviceSetupProgBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#3549BC"
+            android:visibility="invisible" />-->

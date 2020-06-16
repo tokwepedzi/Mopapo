@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:weightSum="30"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--
+        <ImageView
+            android:id="@+id/users_imagevi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>-->
+
+        <TextView
+            android:id="@+id/clientname_titleTxtView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Client"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/clientLoanamnt_titleTxtView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Loan amount"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/clientaddress_titleTxtView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="25sp" />
+
+
+
+
+    </LinearLayout>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

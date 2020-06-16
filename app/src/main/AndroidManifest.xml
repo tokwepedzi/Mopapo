@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.mopapov2">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".DeviceConfig.BranchSetup"></activity>
+        <activity android:name=".DeviceConfig.WelcomenSetup">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".RecepitMenuItems.receiptBranchSelect" />
+        <activity android:name=".AccountsMenuItems.disbursementBranchSelct" />
+        <activity android:name=".ClientsMenuItems.clientsview" />
+        <activity android:name=".ClientsMenuItems.verification" />
+        <activity android:name=".mopapo_offline_enabler" />
+        <activity android:name=".AccountsMenuItems.cashup" />
+        <activity android:name=".AccountsMenuItems.cashcogn" />
+        <activity android:name=".AccountsMenuItems.disbursement" />
+        <activity android:name=".deviceconfig" />
+        <activity android:name=".ReportsMenuItems.reports" />
+        <activity android:name=".ClientsMenuItems.clients" />
+        <activity android:name=".AccountsMenuItems.accounts" />
+        <activity android:name=".RecepitMenuItems.receipt" />
+        <activity android:name=".main" />
+        <activity android:name=".DeviceConfig.login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

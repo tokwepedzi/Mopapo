@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "392103218852",
+    "firebase_url": "https://mopapov2.firebaseio.com",
+    "project_id": "mopapov2",
+    "storage_bucket": "mopapov2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392103218852:android:038832d4e4c74e468ca031",
+        "android_client_info": {
+          "package_name": "com.example.mopapov2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392103218852-8m3jktikabsilfqf1ongkreq2ba6rhqe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFYth32yDG7wJLefDDt8l4bBishUa-hu4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392103218852-8m3jktikabsilfqf1ongkreq2ba6rhqe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
