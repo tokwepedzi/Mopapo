@@ -2,6 +2,8 @@ package com.example.mopapov2.ClientsMenuItems;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mopapov2.AccountsMenuItems.DebtorsAccountsModel.DebtorsAccountsInfo;
+import com.example.mopapov2.DeviceConfig.GlobalDeviceDetails;
 import com.example.mopapov2.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -18,13 +22,13 @@ public class verification extends AppCompatActivity {
     private Button Btnsave ;
     private DatabaseReference reff;
     private Client client;
+    String branchname,companyname;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification);
-
         name = (EditText) findViewById(R.id.fullNameEditText);
         IDnum = (EditText) findViewById(R.id.idNumEditText);
         cellnum = (EditText) findViewById(R.id.clientcellNumEditText);
@@ -37,9 +41,14 @@ public class verification extends AppCompatActivity {
         Btnsave = (Button) findViewById(R.id.verificationFormSaveBtn);
         //double activeLoanAmount =0.00;
 
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("DEVICE_PREFS",Context.MODE_PRIVATE);
+        companyname = sp.getString("companynam","");
+        branchname = sp.getString("branchnam","");
+
 
         client = new Client();                   //this uses the Client class in the Client.java class
-        reff = FirebaseDatabase.getInstance().getReference().child("Mutare");
+        reff = FirebaseDatabase.getInstance().getReference( companyname+" Clients details").child(branchname);
+        //reff = FirebaseDatabase.getInstance().getReference("Impact Financial Services").child("Chinhoyi");//reference works
         reff.keepSynced(true);                   //this keeps the data fresh (app keeps syncing data with firebase database)
                                                 //FirebaseDatabase.getInstance().setPersistenceEnabled(true);//trying to keep writes persistant after coming out of offline mode(this is
                                                 //done in mopapo_offline_enabler class and setting the class nae in manifest file
@@ -63,8 +72,12 @@ public class verification extends AppCompatActivity {
                         &&!TextUtils.isEmpty(client.getNxtKinCell() ))
                     {
 
-                reff.child(address.getText().toString().trim()).setValue(client);
+
+                        reff.child(name.getText().toString().trim()).setValue(client);
+                //reff.child(name.getText().toString().trim()).setValue(client);
                 Toast.makeText(verification.this,"Client added successfully",Toast.LENGTH_LONG).show();
+                setLoanDetails(name);//Call the set loan details method here--it gets tha name(of the client and loan amount(which is zero and sets the details
+                        //In debtors accounts database reference
                 name.setText("");IDnum.setText("");cellnum.setText("");address.setText("");grpname.setText("");collat.setText("");//Clearing all text fields for user to enter next details
                 nxtKinName.setText("");nxtKinaddrss.setText("");nextkincell.setText("");name.requestFocus();
                                                     //startActivity( new Intent(verification.this,clients.class));// go back to clients menu view
@@ -86,6 +99,20 @@ public class verification extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void setLoanDetails(EditText name) {
+        DebtorsAccountsInfo debtor = new DebtorsAccountsInfo();
+        String loanamount="0";
+        String paidamount = "0";
+         DatabaseReference LoanDetailsRef;
+         LoanDetailsRef= FirebaseDatabase.getInstance().getReference(companyname+ " debtors accounts").child(branchname);
+         LoanDetailsRef.keepSynced(true);
+         debtor.setName(name.getText().toString());
+         debtor.setLoanamount(loanamount);
+         debtor.setPaidamount(paidamount);
+         LoanDetailsRef.child(name.getText().toString()).setValue(debtor);
 
     }
 

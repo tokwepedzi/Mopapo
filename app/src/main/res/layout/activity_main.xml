@@ -130,6 +130,7 @@
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView6"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
@@ -157,6 +158,44 @@
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/industry_name"
+        android:layout_width="256dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView6" />
+
+    <TextView
+        android:id="@+id/company_name"
+        android:layout_width="261dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/industry_name" />
+
+    <TextView
+        android:id="@+id/branch_name"
+        android:layout_width="289dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="44dp"
+        android:text="TextView"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/company_name"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

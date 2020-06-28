@@ -48,6 +48,7 @@
             android:layout_weight="1"
             android:ems="28"
             android:hint="type USD amount here"
+            android:inputType="number"
             android:textAlignment="textStart"
             android:textSize="20sp" />
 
@@ -61,16 +62,5 @@
             android:textAlignment="center" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/branch_Enviro_TxtVw"
-        android:layout_width="260dp"
-        android:layout_height="82dp"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:layout_marginTop="40dp"
-        android:height="20dp"
-        android:hint="Branch environment"
-        android:textSize="18dp" />
 
 </LinearLayout>

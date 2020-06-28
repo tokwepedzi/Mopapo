@@ -35,4 +35,6 @@ public class DebtorsAccountsInfo {
     public void setPaidamount(String paidamount) {
         this.paidamount = paidamount;
     }
+
+
 }

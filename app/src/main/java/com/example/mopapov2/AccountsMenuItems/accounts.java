@@ -33,7 +33,7 @@ public class accounts extends AppCompatActivity {
     }
 
     public void openDisbursementScreen(){
-        Intent intent = new Intent(this, disbursementBranchSelct.class);
+        Intent intent = new Intent(this, disbursement.class);
         startActivity(intent);
     }
 

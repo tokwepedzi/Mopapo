@@ -3,19 +3,23 @@ package com.example.mopapov2.DeviceConfig;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.mopapov2.BranchSelectorInterface.IFFirebaseLoadDoneBranchSelect;
-import com.example.mopapov2.BranchSelectorModel.BranchSelector;
 import com.example.mopapov2.DeviceConfig.BranchSetupInterface.IFFirebaseLoadDoneBranchSetup;
 import com.example.mopapov2.DeviceConfig.BranchSetupModel.BranchSetupModelClass;
+import com.example.mopapov2.Login1;
 import com.example.mopapov2.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,36 +33,46 @@ import java.util.List;
 
 public class BranchSetup extends AppCompatActivity implements IFFirebaseLoadDoneBranchSetup {
 
-    TextView mCompany,mIndustry,mBranchname;
+    TextView mCompanyname,mIndustry,mBranchname;
+    EditText mGooglesheetspostlink;
+    Button mSavebranchsetup;
     SearchableSpinner mBranchsearchspinner;
     DatabaseReference mBranchesRef;
     IFFirebaseLoadDoneBranchSetup ifFirebaseLoadDoneBranchSetup;
     List<BranchSetupModelClass> branchies;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences sp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_branch_setup);
 
-        //Get device setup details from the Setup actitivy
-        Intent intent = getIntent();
-        String industryname = intent.getStringExtra(WelcomenSetup.INDUSTRY_NAME);
-        String companyname = intent.getStringExtra((WelcomenSetup.COMPANY_NAME));
         LinearLayout linearLayout = findViewById(R.id.branch_setup_layout);
         AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(3500);
         animationDrawable.start();
 
+        mSavebranchsetup = (Button) findViewById(R.id.saveBranchSetupbtn) ;
         mIndustry = (TextView) findViewById(R.id.industryTxtVw);
-        mCompany = (TextView) findViewById(R.id.companyNameTxtVw);
+        mCompanyname = (TextView) findViewById(R.id.companyNameTxtVw);
         mBranchname = (TextView) findViewById(R.id.branchNameTxtVw);
+        mGooglesheetspostlink = (EditText) findViewById(R.id.google_sheets_post);
+
+        sharedPreferences = getSharedPreferences("DEVICE_PREFS", Context.MODE_PRIVATE);
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("DEVICE_PREFS",Context.MODE_PRIVATE);
+        String industryname = sp.getString("industrynam","");
+        String companyname = sp.getString("companynam","");
         mIndustry.setText(industryname);
-        mCompany.setText(companyname);
+        mCompanyname.setText(companyname);
 
         mBranchsearchspinner = (SearchableSpinner) findViewById(R.id.selectBranchSearchbleSpinner);
         //Init Db
-        mBranchesRef = FirebaseDatabase.getInstance().getReference(companyname+" branches");
+        mBranchesRef = FirebaseDatabase.getInstance().getReference(companyname+ " branches");
+        mBranchesRef.keepSynced(true);
         //Init interface
         ifFirebaseLoadDoneBranchSetup = this;
         //Get data
@@ -96,7 +110,33 @@ public class BranchSetup extends AppCompatActivity implements IFFirebaseLoadDone
         });
 
 
+
+
+
+        mSavebranchsetup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String branch = mBranchname.getText().toString();
+                String postmanurl = mGooglesheetspostlink.getText().toString().trim();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("branchnam",branch);
+                editor.putString("sheetspostman",postmanurl);
+                editor.commit();
+                Toast.makeText(BranchSetup.this,"Branch details saved successfully",Toast.LENGTH_SHORT).show();
+                openUserLogin();
+            }
+        });
+
+
+
     }
+
+    private void openUserLogin() {
+
+        Intent intent = new Intent(this, Login1.class);
+        startActivity(intent);
+    }
+
 
 
     @Override

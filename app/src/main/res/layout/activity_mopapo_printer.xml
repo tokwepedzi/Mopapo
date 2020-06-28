@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    tools:context=".Printing.MopapoPrinter">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Receipt details"
+        android:textSize="25sp"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Date"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/date_field_rcpt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="Date shows here"
+        android:textSize="18sp" />
+    <TextView
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:hint="Time"
+        android:textSize="12sp" />
+    <TextView
+        android:id="@+id/time_field_rcpt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="Time shows here"
+        android:textSize="18sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:hint="Client name:"
+        android:textSize="12sp" />
+    <TextView
+        android:id="@+id/client_name_field_rcpt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="name shows here:"
+        android:textSize="18sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:hint="Amount paid:"
+        android:textSize="12sp" />
+    <TextView
+        android:id="@+id/amnt_paid_field_rcpt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="amount paid shows here:"
+        android:textSize="18sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:hint="Payment description"
+        android:textSize="12sp" />
+    <TextView
+        android:id="@+id/descrptn_field_rcpt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="description goes here"
+        android:textSize="18sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:hint="Loan balance:"
+        android:textSize="12sp" />
+    <TextView
+        android:id="@+id/loan_balance_field_rcpt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="loan balance shows here"
+        android:textSize="18sp" />
+    <Button
+    android:id="@+id/pair_with_printer_rcpt"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="30dp"
+    android:text="Pair with pinter"/>
+    <Button
+        android:id="@+id/print_rcpt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="Print receipt"/>
+
+
+</LinearLayout>

@@ -76,7 +76,7 @@ public class clientsview extends AppCompatActivity implements IFirebaseLoadDone 
         });
 
         //Init Db
-        clientieRef = FirebaseDatabase.getInstance().getReference("Marondera");
+        clientieRef = FirebaseDatabase.getInstance().getReference("Impact Financial Services").child("Chinhoyi");//reference works
 
         //Init interafce
         iFirebaseLoadDone = this;

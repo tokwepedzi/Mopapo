@@ -52,15 +52,30 @@
         android:textColor="#FFFFFF"/>
 
     <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="25dp"
+    android:text="Branch:"
+    android:textColor="#FFFFFF"
+    android:layout_marginStart="10dp"
+    android:textSize="12sp"/>
+    <TextView
+        android:id="@+id/branchNameTxtVw"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"/>
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Branch:"
+        android:text="Google sheets link:"
         android:textColor="#FFFFFF"
         android:layout_marginStart="10dp"
         android:textSize="12sp"/>
-    <TextView
-        android:id="@+id/branchNameTxtVw"
+    <EditText
+        android:id="@+id/google_sheets_post"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -78,7 +93,7 @@
 
 
     <Button
-        android:id="@+id/setupScreenNextBtn"
+        android:id="@+id/saveBranchSetupbtn"
         android:layout_width="150dp"
         android:layout_height="55dp"
         android:layout_gravity="center"

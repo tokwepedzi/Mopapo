@@ -10,18 +10,19 @@ public class Client {
    private String nxtKinName;
    private String nxtKinAddrss;
    private String nxtKinCell;
-   private double loanamount;
+   //private String paidamount;
+
 
     public Client() {
     }
 
-    public Client(double loanamount) {
+   /* public Client(String loanamount) {
         this.loanamount = loanamount;
     }
 
-    public double getLoanamount() {
+    public String getLoanamount() {
         return loanamount;
-    }
+    }*/
 
     public String getName() {
         return name;
@@ -94,4 +95,5 @@ public class Client {
     public void setNxtKinCell(String nxtKinCell) {
         this.nxtKinCell = nxtKinCell;
     }
+
 }

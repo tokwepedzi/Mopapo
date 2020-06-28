@@ -5,35 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
     android:gravity="top"
     tools:context=".RecepitMenuItems.receipt">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:text="Loan Repayment"
         android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="30sp" />
+        android:textSize="25sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/clientName"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:height="20dp"
-            android:textSize="18dp"
-            android:text="Name of client" />
-
-        <Spinner
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
             android:id="@+id/groupMemberNameSpin1"
             android:layout_width="280dp"
-            android:layout_height="60dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
             android:height="40dp"
+            android:layout_marginTop="10dp"
+            app:hintText="Select client to receipt"
             android:textSize="18dp"
             />
 
@@ -42,6 +38,7 @@
             android:id="@+id/receivedAmount"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_marginTop="20dp"
             android:height="25dp"
             android:textSize="18dp"
             android:textAlignment="textStart"
@@ -50,21 +47,60 @@
         <EditText
             android:id="@+id/receivedAmountFill"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:layout_weight="1"
             android:ems="28"
             android:hint="type USD amount here"
+            android:inputType="number|numberDecimal"
             android:textAlignment="textStart"
             android:textSize="14sp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+            <Button
+                android:id="@+id/printReceiptBtn"
+                android:layout_width="130dp"
+                android:layout_height="60dp"
+                android:text="Print receipt"
+                android:layout_marginStart="10dp"
+                android:textAlignment="center" />
 
-        <Button
-            android:id="@+id/printReceiptBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text="Print receipt"
-            android:textAlignment="center" />
+            <Button
+                android:id="@+id/confirm_entries"
+                android:layout_width="130dp"
+                android:layout_height="60dp"
+                android:text="confirm"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp" />
+
+
+        </RelativeLayout>
+
+
 
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/clientname_view"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="60dp" />
+    <TextView
+        android:id="@+id/client_paidamnt_view"
+        android:layout_width="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="60dp" />
+
+    <TextView
+        android:id="@+id/current_amnt"
+        android:layout_width="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="60dp" />
 
 </LinearLayout>

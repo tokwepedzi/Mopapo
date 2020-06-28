@@ -6,26 +6,37 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.mopapov2.AccountsMenuItems.accounts;
 import com.example.mopapov2.ClientsMenuItems.clients;
+import com.example.mopapov2.DeviceConfig.GlobalDeviceDetails;
 import com.example.mopapov2.RecepitMenuItems.receipt;
 import com.example.mopapov2.ReportsMenuItems.reports;
 
 public class main extends AppCompatActivity {
 
     RelativeLayout rlbtn1,rlbtn2,rlbtn3,rlbtn4,rlbtn5;
+    TextView mIndustryname,mCompanyname,mBranchname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        GlobalDeviceDetails globalDeviceDetails = (GlobalDeviceDetails) getApplicationContext();
 
         rlbtn1 = (RelativeLayout) findViewById(R.id.receiptBtn);
         rlbtn2 = (RelativeLayout) findViewById(R.id.accountsBtn);
         rlbtn3 = (RelativeLayout) findViewById(R.id.clientsBtn);
         rlbtn4 = (RelativeLayout) findViewById(R.id.reportsBtn);
         rlbtn5 = (RelativeLayout) findViewById(R.id.deviceConfigBtn);
+        mIndustryname = (TextView) findViewById(R.id.industry_name);
+        mCompanyname = (TextView) findViewById(R.id.company_name);
+        mBranchname = (TextView) findViewById(R.id.branch_name);
+
+        mIndustryname.setText(globalDeviceDetails.getIndustryname());
+        mCompanyname.setText(globalDeviceDetails.getCompanyname());
+        mBranchname.setText(globalDeviceDetails.getBranchname());
 
         rlbtn1.setOnClickListener(new View.OnClickListener() {
             @Override

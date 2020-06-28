@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -43,25 +44,20 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
     ProgressBar mSetupprogressbar;
     String companynamespinnerinput;
 
-    //variables for saving the Welcomesetup activity state so that data is not los on the screen on resumption
-    public  final String INDUSTRY_SHARED_PRESF = "industrysharedprefs";
-    public static final String  INDUSTRY_NAME = "industryname";
-    private String industryname;
-    public  final String COMPANY_NAME_SHARED_PREFS = "companysharedprefs";
-    public static final String  COMPANY_NAME = "companyname";
-    private String companyname;
-
-
 
     DatabaseReference companiesRef;
     IFFirebaseLoadDoneCompny ifFirebaseLoadDoneCompny;
     List<Company> companies;
+
+    SharedPreferences sharedPreferences;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcomen_setup);
+
 
         fadingTextView = findViewById(R.id.welcome_faingMsgTxtVw);
         LinearLayout linearLayout = findViewById(R.id.welcome_layout);
@@ -77,6 +73,7 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
         mCompanyname = (TextView) findViewById(R.id.companyNameTxtVw);
         mSetupprogressbar = (ProgressBar) findViewById(R.id.deciceSetUpProgressBar);
 
+        sharedPreferences = getSharedPreferences("DEVICE_PREFS", Context.MODE_PRIVATE);
 
 
 
@@ -92,12 +89,10 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
                 mBuilder.setSingleChoiceItems(IndustryListItems, -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                         mIndustry.setText(IndustryListItems[i]);
-                         savemIndustryData();//save industry textview data using shared prefs
+                        mIndustry.setText(IndustryListItems[i]);
                         dialogInterface.dismiss();
                     }
-                });
-                mBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                     }
@@ -107,14 +102,13 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
                 mDialog.show();
             }
         });
-        loadIndustryData();
-        updateIndustryViews();
 
 
 
 
         //Init Db
         companiesRef = FirebaseDatabase.getInstance().getReference("Companies");
+        companiesRef.keepSynced(true);
         //Init Interface
         ifFirebaseLoadDoneCompny = this;
         //Get data
@@ -157,70 +151,31 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
             public void onClick(View view) {
                 //Set the progressbar visiblity to be seen
                 mSetupprogressbar.setVisibility(View.VISIBLE);
+                String industry = mIndustry.getText().toString();
+                String company = mCompanyname.getText().toString();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("industrynam",industry);
+                editor.putString("companynam",company);
+                editor.commit();
+                Toast.makeText(WelcomenSetup.this,"Industry and Company details saved successfully.",Toast.LENGTH_SHORT).show();
 
-                //Set the company field to the value of the company selected by the spinner
-               // companynamespinnerinput = mSelectorganization.getSelectedItem().toString().trim();
-               // mCompanyname.setText(companynamespinnerinput);
-
-                //Industryname and company name and store for next screen
-                saveCompanyNameData();
                 openBranchSetupScreen();
             }
         });
-        loadCompanyNameData();
-        updateCompanyNameViews();
 
 
 
     }
 
     private void openBranchSetupScreen() {
-        String industryname = mIndustry.getText().toString();
-        String companyname = mCompanyname.getText().toString();
+
         Intent intent = new Intent(this,BranchSetup.class);
-        intent.putExtra(INDUSTRY_NAME, industryname);
-        intent.putExtra(COMPANY_NAME, companyname);
+
         mSetupprogressbar.setVisibility(View.INVISIBLE);
         startActivity(intent);
     }
 
-    public void saveCompanyNameData() {
-        SharedPreferences sharedPreferences = getSharedPreferences(COMPANY_NAME_SHARED_PREFS,MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(COMPANY_NAME,mCompanyname.getText().toString());//set companyname field value (textview)
-        editor.apply();
-        Toast.makeText(this, "Company name saved",Toast.LENGTH_SHORT).show();
-    }
 
-    public  void loadCompanyNameData(){
-        SharedPreferences sharedPreferences = getSharedPreferences(COMPANY_NAME_SHARED_PREFS,MODE_PRIVATE);
-        companyname = sharedPreferences.getString(COMPANY_NAME,"");
-    }
-
-    public void updateCompanyNameViews(){
-        mCompanyname.setText(companyname);
-    }
-
-
-    public void savemIndustryData() {
-        SharedPreferences sharedPreferences = getSharedPreferences(INDUSTRY_SHARED_PRESF,MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(INDUSTRY_NAME,mIndustry.getText().toString().trim());
-        editor.apply();
-        Toast.makeText(this,"Industry info saved",Toast.LENGTH_SHORT).show();
-    }
-
-
-    public  void loadIndustryData() {
-        SharedPreferences sharedPreferences = getSharedPreferences(INDUSTRY_SHARED_PRESF,MODE_PRIVATE);
-        industryname = sharedPreferences.getString(INDUSTRY_NAME,"");
-
-    }
-
-    public void updateIndustryViews(){
-        mIndustry.setText(industryname);
-
-    }
     @Override
     public void onFirebaseLoadSuccessCompany(List<Company> companyList) {
         companies = companyList;

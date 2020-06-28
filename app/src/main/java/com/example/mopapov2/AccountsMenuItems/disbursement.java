@@ -3,6 +3,8 @@ package com.example.mopapov2.AccountsMenuItems;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,6 +16,8 @@ import android.widget.Toast;
 import com.example.mopapov2.BranchSelectorModel.BranchSelector;
 import com.example.mopapov2.AccountsMenuItems.DebtorsAccountsInterface.IFFirebaseLoadComplete;
 import com.example.mopapov2.AccountsMenuItems.DebtorsAccountsModel.DebtorsAccountsInfo;
+import com.example.mopapov2.ClientsMenuItems.Client;
+import com.example.mopapov2.DeviceConfig.GlobalDeviceDetails;
 import com.example.mopapov2.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,34 +38,44 @@ public class disbursement extends AppCompatActivity  implements IFFirebaseLoadCo
 
     DatabaseReference DebtorsRef;
     IFFirebaseLoadComplete ifFirebaseLoadComplete;
-    List<DebtorsAccountsInfo>debtorsAccountsInfos;
+    List<Client>debtorsAccountsInfos;
     String loanamount;
     DebtorsAccountsInfo debtor;
     BranchSelector device;
+    SharedPreferences sp ;
 
     String name;
+    String companyname, branchname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disbursement);
 
-        String branchname = getIntent().getStringExtra("branchkey"); //gets the the passed branch name by the activity that called this class
+        //GlobalDeviceDetails globalDeviceDetails = (GlobalDeviceDetails) getApplicationContext();
+
+        //String branchname = getIntent().getStringExtra("branchkey"); //gets the the passed branch name by the activity that called this class
         searchableSpinner = findViewById(R.id.groupMemberNameSpin1);
-        branchenvirovw = (TextView) findViewById(R.id.branch_Enviro_TxtVw);
-        branchenvirovw.setText("Branch:"+ branchname);
+        loanAmountEdt = findViewById(R.id.loanAmountEditTxt);
+        confirmDisburse = findViewById(R.id.confirmDisbursementBtn);
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("DEVICE_PREFS",Context.MODE_PRIVATE);
+        branchname = sp.getString("branchnam","");
+        companyname = sp.getString("companynam","");
+        //branchenvirovw = (TextView) findViewById(R.id.branch_Enviro_TxtVw);
+        //branchenvirovw.setText("Branch:"+ branchname);
         //Init Db
-        DebtorsRef = FirebaseDatabase.getInstance().getReference(branchname);
+        DebtorsRef = FirebaseDatabase.getInstance().getReference(companyname+ " debtors accounts").child(branchname);
+        DebtorsRef.keepSynced(true);
         //Init interface
         ifFirebaseLoadComplete = this;
         //Get data
         DebtorsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<DebtorsAccountsInfo>debtorsAccountsInfos = new ArrayList<>();
+                List<Client>debtorsAccountsInfos = new ArrayList<>();
                 for(DataSnapshot debtorsSnapShot:dataSnapshot.getChildren())
                 {
-                    debtorsAccountsInfos.add(debtorsSnapShot.getValue(DebtorsAccountsInfo.class));
+                    debtorsAccountsInfos.add(debtorsSnapShot.getValue(Client.class));
                 }
                 ifFirebaseLoadComplete.onFirebaseLoadSuccess(debtorsAccountsInfos);
 
@@ -74,8 +88,7 @@ public class disbursement extends AppCompatActivity  implements IFFirebaseLoadCo
             }
         });
 
-        loanAmountEdt = findViewById(R.id.loanAmountEditTxt);
-        confirmDisburse = findViewById(R.id.confirmDisbursementBtn);
+
 
 
         confirmDisburse.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +101,8 @@ public class disbursement extends AppCompatActivity  implements IFFirebaseLoadCo
                 debtor.setName(name);
                 debtor.setPaidamount("0");
                 DebtorsRef.child(debtor.getName()).setValue(debtor);
+                Toast.makeText(disbursement.this,"Disbursement Successful",Toast.LENGTH_LONG).show();
+                loanAmountEdt.setText("");
 
             }
         });
@@ -96,11 +111,11 @@ public class disbursement extends AppCompatActivity  implements IFFirebaseLoadCo
 
 
     @Override
-    public void onFirebaseLoadSuccess(List<DebtorsAccountsInfo> debtorsAccountsInfoList) {
+    public void onFirebaseLoadSuccess(List<Client> debtorsAccountsInfoList) {
         debtorsAccountsInfos = debtorsAccountsInfoList;
         //Get all names
         List<String>name_list = new ArrayList<>();
-        for (DebtorsAccountsInfo debtorentry:debtorsAccountsInfoList)
+        for (Client debtorentry:debtorsAccountsInfoList)
             name_list.add(debtorentry.getName());
         //Create adapter  and set for spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,name_list);

@@ -1,37 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mopapov2">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
     <application
+        android:name=".DeviceConfig.GlobalDeviceDetails"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DeviceConfig.BranchSetup"></activity>
-        <activity android:name=".DeviceConfig.WelcomenSetup">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".Login1"></activity>
+        <activity android:name=".Printing.MopapoPrinter" />
+        <activity
+            android:name=".DeviceConfig.BranchSetup"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".DeviceConfig.WelcomenSetup"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
         </activity>
-        <activity android:name=".RecepitMenuItems.receiptBranchSelect" />
-        <activity android:name=".AccountsMenuItems.disbursementBranchSelct" />
-        <activity android:name=".ClientsMenuItems.clientsview" />
-        <activity android:name=".ClientsMenuItems.verification" />
-        <activity android:name=".mopapo_offline_enabler" />
-        <activity android:name=".AccountsMenuItems.cashup" />
-        <activity android:name=".AccountsMenuItems.cashcogn" />
-        <activity android:name=".AccountsMenuItems.disbursement" />
-        <activity android:name=".deviceconfig" />
-        <activity android:name=".ReportsMenuItems.reports" />
-        <activity android:name=".ClientsMenuItems.clients" />
-        <activity android:name=".AccountsMenuItems.accounts" />
-        <activity android:name=".RecepitMenuItems.receipt" />
-        <activity android:name=".main" />
-        <activity android:name=".DeviceConfig.login">
+        <activity
+            android:name=".RecepitMenuItems.receiptBranchSelect"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ClientsMenuItems.clientsview"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ClientsMenuItems.verification"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".mopapo_offline_enabler"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".AccountsMenuItems.cashup"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".AccountsMenuItems.cashcogn"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".AccountsMenuItems.disbursement"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".deviceconfig"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ReportsMenuItems.reports"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ClientsMenuItems.clients"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".AccountsMenuItems.accounts"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".RecepitMenuItems.receipt"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".main"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".DeviceConfig.Register"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
