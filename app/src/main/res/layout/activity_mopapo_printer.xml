@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Receipt details"
+        android:layout_marginTop="10dp"
         android:textSize="25sp"
         android:gravity="center"/>
 
@@ -63,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:hint="Amount paid:"
+        android:hint="Amount paid USD:"
         android:textSize="12sp" />
     <TextView
         android:id="@+id/amnt_paid_field_rcpt"
@@ -72,6 +73,7 @@
         android:layout_marginStart="10dp"
         android:hint="amount paid shows here:"
         android:textSize="18sp" />
+    <!--
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -85,13 +87,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:hint="description goes here"
-        android:textSize="18sp" />
+        android:textSize="18sp" />-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:hint="Loan balance:"
+        android:hint="Loan balance USD:"
         android:textSize="12sp" />
     <TextView
         android:id="@+id/loan_balance_field_rcpt"

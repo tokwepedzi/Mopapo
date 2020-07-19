@@ -14,64 +14,61 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Loan Repayment"
+        android:layout_marginTop="10dp"
         android:textAlignment="center"
         android:textSize="25sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+
+        <!-- <TextView
+             android:id="@+id/receivedAmount"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="10dp"
+             android:height="25dp"
+             android:textSize="10sp"
+             android:textAlignment="textStart"
+             android:text="Received Amount (USD)" />-->
 
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
             android:id="@+id/groupMemberNameSpin1"
-            android:layout_width="280dp"
-            android:layout_height="80dp"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
             android:layout_gravity="center"
-            android:height="40dp"
             android:layout_marginTop="10dp"
-            app:hintText="Select client to receipt"
-            android:textSize="18dp"
-            />
-
-
-        <TextView
-            android:id="@+id/receivedAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginTop="20dp"
-            android:height="25dp"
-            android:textSize="18dp"
-            android:textAlignment="textStart"
-            android:text="Received Amount (USD)" />
+            android:height="40dp"
+            android:outlineSpotShadowColor="@color/colorPrimaryDark"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:hintText="Search clients" />
 
         <EditText
             android:id="@+id/receivedAmountFill"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="70dp"
+            android:outlineProvider="bounds"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:ems="28"
-            android:hint="type USD amount here"
+            android:hint="Type amount here"
             android:inputType="number|numberDecimal"
-            android:textAlignment="textStart"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp">
-            <Button
-                android:id="@+id/printReceiptBtn"
-                android:layout_width="130dp"
-                android:layout_height="60dp"
-                android:text="Print receipt"
-                android:layout_marginStart="10dp"
-                android:textAlignment="center" />
 
             <Button
                 android:id="@+id/confirm_entries"
-                android:layout_width="130dp"
+                android:layout_width="150dp"
                 android:layout_height="60dp"
                 android:text="confirm"
-                android:layout_alignParentEnd="true"
+               android:layout_centerInParent="true"
                 android:layout_marginEnd="10dp" />
 
 
@@ -82,25 +79,62 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/clientname_view"
-        android:layout_marginTop="40dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_height="60dp" />
-    <TextView
-        android:id="@+id/client_paidamnt_view"
-        android:layout_width="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_height="60dp" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/gradient2"
+        android:layout_marginTop="10dp">
 
-    <TextView
-        android:id="@+id/current_amnt"
-        android:layout_width="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_height="60dp" />
+
+        <TextView
+            android:id="@+id/clientname_tag"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Client name:"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/clientname_view"
+
+            android:layout_width="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="35dp" />
+        <TextView
+            android:id="@+id/paid_amount_tag"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Paid amount:"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/client_paidamnt_view"
+            android:layout_width="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="35dp" />
+        <TextView
+            android:id="@+id/_tag"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Loan Balance:"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/current_amnt"
+            android:layout_width="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="35dp" />
+
+
+
+
+    </LinearLayout>
+
 
 </LinearLayout>

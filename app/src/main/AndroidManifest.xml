@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.mopapov2">
+    package="com.tafrica.mopapov2">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -15,8 +15,13 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login1"></activity>
-        <activity android:name=".Printing.MopapoPrinter" />
+        <activity android:name=".Login1"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
+        </activity>
+        <activity android:name=".Printing.MopapoPrinter"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".DeviceConfig.BranchSetup"
             android:screenOrientation="portrait"
@@ -26,10 +31,6 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
         </activity>
-        <activity
-            android:name=".RecepitMenuItems.receiptBranchSelect"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ClientsMenuItems.clientsview"
             android:screenOrientation="portrait"

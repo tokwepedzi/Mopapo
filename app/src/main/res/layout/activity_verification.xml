@@ -54,8 +54,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="28"
+        android:inputType="number"
         android:textAlignment="textStart"
-        android:textSize="12sp"/>
+        android:textSize="12sp" />
 
 
 

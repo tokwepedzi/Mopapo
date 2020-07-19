@@ -13,7 +13,7 @@
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         app:cardBackgroundColor="#AB5FB8"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         app:cardCornerRadius="15dp"
         >
 
@@ -41,7 +41,7 @@
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         app:cardBackgroundColor="#AB5FB8"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="130dp"
         app:cardCornerRadius="15dp"
         >
 
@@ -71,7 +71,7 @@
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         app:cardBackgroundColor="#AB5FB8"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="220dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="1dp">
 
