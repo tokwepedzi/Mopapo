@@ -1,7 +1,5 @@
 package com.tafrica.mopapov2.AccountsMenuItems;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -41,12 +39,12 @@ public class accounts extends BaseActivity {
     }
 
     public void openDisbursementScreen(){
-        Intent intent = new Intent(this, disbursement.class);
+        Intent intent = new Intent(this, com.tafrica.mopapov2.AccountsMenuItems.disbursement.class);
         startActivity(intent);
     }
 
     public void openCahsupscreen(){
-        Intent intent = new Intent(this, cashup.class);
+        Intent intent = new Intent(this, com.tafrica.mopapov2.AccountsMenuItems.cashup.class);
         startActivity(intent);
 
     }

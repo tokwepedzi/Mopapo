@@ -1,8 +1,6 @@
 package com.tafrica.mopapov2;
-import android.app.Application;
-
-import com.tafrica.mopapov2.DeviceConfig.GlobalDeviceDetails;
 import com.google.firebase.database.FirebaseDatabase;
+import com.tafrica.mopapov2.DeviceConfig.GlobalDeviceDetails;
 
 public class mopapo_offline_enabler extends GlobalDeviceDetails {
 

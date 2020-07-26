@@ -1,7 +1,5 @@
 package com.tafrica.mopapov2.AccountsMenuItems;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 import com.tafrica.mopapov2.BaseActivity;

@@ -1,9 +1,5 @@
 package com.tafrica.mopapov2.DeviceConfig;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,21 +11,22 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tafrica.mopapov2.BaseActivity;
-import com.tafrica.mopapov2.DeviceConfig.CompanyModel.Company;
-import com.tafrica.mopapov2.DeviceConfig.CompanyModel.CompanyInterface.IFFirebaseLoadDoneCompny;
-import com.tafrica.mopapov2.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tafrica.mopapov2.DeviceConfig.CompanyModel.Company;
+import com.tafrica.mopapov2.DeviceConfig.CompanyModel.CompanyInterface.IFFirebaseLoadDoneCompny;
+import com.tafrica.mopapov2.R;
 import com.tomer.fadingtextview.FadingTextView;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
@@ -41,7 +38,7 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
     private FadingTextView fadingTextView;
     Button mSelectyrindustry, mNextbtn;
     SearchableSpinner mSelectorganization;
-    TextView mIndustry, mCompanyname;
+    TextView mIndustry, mCompanyname,mNeworgregister;
     String[] IndustryListItems;
 
     String companynamespinnerinput;
@@ -74,6 +71,7 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
         mSelectorganization = (SearchableSpinner) findViewById(R.id.selectOrgSearchbleSpinner);
         mIndustry = (TextView) findViewById(R.id.industryTxtVw);
         mCompanyname = (TextView) findViewById(R.id.companyNameTxtVw);
+        mNeworgregister = (TextView) findViewById(R.id.new_org_register_txtvw);
         mLoadingBar = new ProgressDialog(WelcomenSetup.this);
 
 
@@ -202,12 +200,28 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
 
 
 
+
+        mNeworgregister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRegistrationpage();
+
+            }
+        });
+
+
+
+    }
+
+    private void openRegistrationpage() {
+        Intent intent = new Intent(this, NewOrgRegistration.class);
+        startActivity(intent);
     }
 
 
     private void openBranchSetupScreen() {
 
-        Intent intent = new Intent(this,BranchSetup.class);
+        Intent intent = new Intent(this, BranchSetup.class);
 
 
         startActivity(intent);

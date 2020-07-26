@@ -1,8 +1,5 @@
 package com.tafrica.mopapov2.DeviceConfig;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -12,18 +9,18 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tafrica.mopapov2.BaseActivity;
-import com.tafrica.mopapov2.Login1;
-import com.tafrica.mopapov2.R;
-import com.tafrica.mopapov2.main;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.tafrica.mopapov2.Login1;
+import com.tafrica.mopapov2.R;
 
 public class Register extends AppCompatActivity {
 
@@ -113,7 +110,7 @@ public class Register extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 mLoadingBar.hide();
                                 Toast.makeText(Register.this, "User created.", Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(getApplicationContext(), WelcomenSetup.class));
+                                startActivity(new Intent(getApplicationContext(), com.tafrica.mopapov2.DeviceConfig.WelcomenSetup.class));
 
                             } else {
                                 mLoadingBar.hide();
@@ -133,7 +130,7 @@ public class Register extends AppCompatActivity {
         mAlreadyregistered.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), WelcomenSetup.class));
+                startActivity(new Intent(getApplicationContext(), com.tafrica.mopapov2.DeviceConfig.WelcomenSetup.class));
 
             }
         });

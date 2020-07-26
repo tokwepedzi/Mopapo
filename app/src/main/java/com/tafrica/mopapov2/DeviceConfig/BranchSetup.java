@@ -1,9 +1,5 @@
 package com.tafrica.mopapov2.DeviceConfig;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,16 +15,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tafrica.mopapov2.BaseActivity;
-import com.tafrica.mopapov2.DeviceConfig.BranchSetupInterface.IFFirebaseLoadDoneBranchSetup;
-import com.tafrica.mopapov2.DeviceConfig.BranchSetupModel.BranchSetupModelClass;
-import com.tafrica.mopapov2.Login1;
-import com.tafrica.mopapov2.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tafrica.mopapov2.DeviceConfig.BranchSetupInterface.IFFirebaseLoadDoneBranchSetup;
+import com.tafrica.mopapov2.DeviceConfig.BranchSetupModel.BranchSetupModelClass;
+import com.tafrica.mopapov2.Login1;
+import com.tafrica.mopapov2.R;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.ArrayList;
@@ -74,7 +73,7 @@ public class BranchSetup extends AppCompatActivity implements IFFirebaseLoadDone
 
         mBranchsearchspinner = (SearchableSpinner) findViewById(R.id.selectBranchSearchbleSpinner);
         //Init Db
-        mBranchesRef = FirebaseDatabase.getInstance().getReference(companyname+ " branches");
+        mBranchesRef = FirebaseDatabase.getInstance().getReference("Branches").child(companyname+ " branches");
         mBranchesRef.keepSynced(true);
         //Init interface
         ifFirebaseLoadDoneBranchSetup = this;

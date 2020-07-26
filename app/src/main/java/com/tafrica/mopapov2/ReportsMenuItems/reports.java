@@ -1,14 +1,13 @@
 package com.tafrica.mopapov2.ReportsMenuItems;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.tafrica.mopapov2.R;
-import com.tafrica.mopapov2.RecepitMenuItems.receipt;
 import com.tafrica.mopapov2.main;
 
 public class reports extends AppCompatActivity {

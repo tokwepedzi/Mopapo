@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DeviceConfig.NewOrgRegistration">
+
+    <TextView
+        android:id="@+id/Add_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="22sp"
+        android:text="Company details" />
+
+
+
+
+
+    <TextView
+        android:id="@+id/company_name_txtvww"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Company name" />
+
+
+    <EditText
+        android:id="@+id/Company_name_Edittxt"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_weight="1"
+        android:ems="28"
+        android:textAlignment="textStart"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/branch_name_txtvw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Branch name" />
+
+    <EditText
+        android:id="@+id/branch_name_EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_weight="1"
+        android:ems="28"
+        android:inputType="text"
+        android:textAlignment="textStart"
+        android:textSize="12sp" />
+
+
+
+    <TextView
+        android:id="@+id/clientPhysicalAddressTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Company address" />
+
+    <EditText
+        android:id="@+id/company_AddressEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_weight="1"
+        android:ems="28"
+        android:textAlignment="textStart"
+        android:textSize="12sp"/>
+
+
+
+    <TextView
+        android:id="@+id/groupNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact person" />
+
+
+    <EditText
+        android:id="@+id/contact_person_EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_weight="1"
+        android:ems="28"
+        android:textAlignment="textStart"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/collateralItemsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Telephone/Cell number " />
+
+    <EditText
+        android:id="@+id/telephone_cell_EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_weight="1"
+        android:ems="28"
+        android:inputType="number"
+        android:textAlignment="textStart"
+        android:textSize="12sp" />
+
+
+
+    <TextView
+        android:id="@+id/nextOfKinTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email address"
+        android:height="15dp"/>
+
+    <EditText
+        android:id="@+id/email_EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_weight="1"
+        android:ems="28"
+        android:inputType="textEmailAddress"
+        android:textAlignment="textStart"
+        android:textSize="12sp" />
+
+
+
+
+
+    <Button
+        android:id="@+id/company_details_save_btn"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:text="Save" />
+
+</LinearLayout>

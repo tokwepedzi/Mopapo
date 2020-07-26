@@ -22,6 +22,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.tafrica.mopapov2.R;
+import com.tafrica.mopapov2.main;
 
 public class Login1 extends AppCompatActivity {
 

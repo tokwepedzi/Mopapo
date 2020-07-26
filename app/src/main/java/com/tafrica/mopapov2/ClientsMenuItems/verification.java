@@ -1,7 +1,5 @@
 package com.tafrica.mopapov2.ClientsMenuItems;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,13 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.tafrica.mopapov2.AccountsMenuItems.DebtorsAccountsModel.DebtorsAccountsInfo;
-import com.tafrica.mopapov2.BaseActivity;
-import com.tafrica.mopapov2.DeviceConfig.GlobalDeviceDetails;
-import com.tafrica.mopapov2.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.tafrica.mopapov2.AccountsMenuItems.DebtorsAccountsModel.DebtorsAccountsInfo;
+import com.tafrica.mopapov2.BaseActivity;
+import com.tafrica.mopapov2.R;
 
 public class verification extends BaseActivity {
     EditText name,IDnum,cellnum,address,grpname,collat,nxtKinName,nxtKinaddrss,nextkincell;
@@ -114,10 +111,12 @@ public class verification extends BaseActivity {
         String principal="0";
         String duedate ="0";
         String disbursementdate="0";
-         DatabaseReference LoanDetailsRef;
+         DatabaseReference LoanDetailsRef,TotalizersRef;
          LoanDetailsRef= FirebaseDatabase.getInstance().getReference("user").child(FirebaseAuth.getInstance().getUid())
                  .child(companyname+" debtors accounts").child(branchname);
          LoanDetailsRef.keepSynced(true);
+         TotalizersRef = FirebaseDatabase.getInstance().getReference("user").child(FirebaseAuth.getInstance().getUid());
+
          debtor.setName(name.getText().toString());
          debtor.setLoanamount(loanamount);
          debtor.setPaidamount(paidamount);
@@ -127,6 +126,7 @@ public class verification extends BaseActivity {
          debtor.setDuedate(duedate);
          debtor.setDisbursementdate(disbursementdate);
          LoanDetailsRef.child(name.getText().toString()).setValue(debtor);
+         TotalizersRef.child(companyname+ " Totalizers").child(branchname).child("totalcollections").setValue("0");
 
     }
 

@@ -2,9 +2,8 @@ package com.tafrica.mopapov2.DeviceConfig;
 
 import android.app.Application;
 
-import com.tafrica.mopapov2.BaseActivity;
-import com.tafrica.mopapov2.LogoutListener;
 import com.google.firebase.database.FirebaseDatabase;
+import com.tafrica.mopapov2.LogoutListener;
 
 import java.util.Timer;
 import java.util.TimerTask;

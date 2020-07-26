@@ -1,17 +1,15 @@
 package com.tafrica.mopapov2.ClientsMenuItems;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.tafrica.mopapov2.BaseActivity;
 import com.tafrica.mopapov2.R;
-import com.tafrica.mopapov2.ReportsMenuItems.reports;
 
 public class clients extends BaseActivity {
 
@@ -59,12 +57,12 @@ public class clients extends BaseActivity {
 
 
     public  void newVerification(){
-        Intent intent = new Intent(this, verification.class);
+        Intent intent = new Intent(this, com.tafrica.mopapov2.ClientsMenuItems.verification.class);
         startActivity(intent);
     }
 
     public void clientView_mthd(){
-        Intent intent = new Intent(this, clientsview.class);
+        Intent intent = new Intent(this, com.tafrica.mopapov2.ClientsMenuItems.clientsview.class);
         startActivity(intent);
     }
 }
