@@ -6,4 +6,212 @@
     android:layout_height="match_parent"
     tools:context=".ReportsMenuItems.reports">
 
+    <TextView
+        android:id="@+id/collection_report_heading"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="Collection Report"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/select_date_linear_btn"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/collection_report_heading">
+        <TextView
+            android:id="@+id/from_txtvw"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="FROM:"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/date_txtvw"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="DD/MM/YYYY"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/calender_icon_imgvw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_calendar" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/select_date2_linear_btn"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/select_date_linear_btn">
+        <TextView
+            android:id="@+id/to_txtvw"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="TO:"
+            android:textSize="15sp" />
+
+
+        <TextView
+            android:id="@+id/date2_txtvw"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="DD/MM/YYYY"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/calender2_icon_imgvw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_calendar" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/column_headings"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/load_reports_btn">
+
+        <TextView
+            android:layout_width="88dp"
+            android:layout_height="wrap_content"
+            android:text="DATE"
+            android:textAlignment="center"
+            android:textColor="@color/text_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="88dp"
+            android:layout_height="wrap_content"
+            android:text="NAME"
+            android:textAlignment="center"
+            android:textColor="@color/text_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <!--<TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="DUE DATE"
+            android:textAlignment="center"
+            android:textColor="@color/text_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />-->
+
+        <TextView
+            android:layout_width="88dp"
+            android:layout_height="match_parent"
+            android:text="PAID"
+            android:textAlignment="center"
+            android:textColor="@color/text_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="88dp"
+            android:layout_height="wrap_content"
+            android:text="BALANCE"
+            android:textAlignment="textStart"
+            android:textColor="@color/text_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/report_listvw"
+        android:layout_width="0dp"
+        android:layout_height="240dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:background="#d3d3d3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/column_headings" />
+
+    <Button
+        android:id="@+id/load_reports_btn"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/round_hollow_borders"
+        android:backgroundTint="@color/colorAccent"
+        android:text="GO"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/select_date2_linear_btn" />
+
+    <TextView
+        android:id="@+id/total_coolections_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="8dp"
+        android:text="TOTAL COLLECTIONS"
+        android:textColor="@color/text_black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/report_listvw" />
+
+    <TextView
+        android:id="@+id/total_amnt_displaytxtvw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:hint="0000.00"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/total_coolections_heading" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,6 +16,29 @@
         android:layout_marginTop="10dp"
         android:textSize="25sp"
         android:gravity="center"/>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Print company name"
+            android:textSize="18sp"
+            android:gravity="center_vertical"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/co_name_print_swtch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp" />
+
+
+    </LinearLayout>
+
+
 
     <TextView
         android:layout_width="65dp"

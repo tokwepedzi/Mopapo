@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginBottom="40dp"
-                android:text="Disbursement"
+                android:text="Loan Disbursement"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp" />
         </RelativeLayout>
@@ -86,5 +86,35 @@
                 android:textSize="15sp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        app:cardBackgroundColor="#6D7DDA"
+        android:layout_marginTop="220dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="1dp">
+
+        <RelativeLayout
+            android:id="@+id/managecashBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/managecashBtnTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="40dp"
+                android:text="Cash Manager"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
 
 </RelativeLayout>

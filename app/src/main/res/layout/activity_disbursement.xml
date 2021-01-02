@@ -3,18 +3,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginTop="2dp"
     android:orientation="vertical"
-    android:gravity="top"
     tools:context=".AccountsMenuItems.disbursement">
+    <ScrollView
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:orientation="vertical">
+
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="1dp"
         android:text="Loan disbursement"
-        android:textSize="25sp"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+        <LinearLayout
+            android:id="@+id/select_date_linear_btn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/disbursedate_txtvw"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="DD/MM/YYYY"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/calender_icon_imgvw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_calendar" />
+
+        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,15 +64,36 @@
 
 
 
-        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-        android:id="@+id/groupMemberNameSpin1"
-        android:layout_width="200dp"
-        android:layout_height="70dp"
-
+        <LinearLayout
+            android:id="@+id/searchable_linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_gravity="center"
-        android:height="40dp"
-        android:textSize="18sp"
-        app:hintText="Search clients" />
+            android:layout_marginTop="20dp"
+            android:background="@drawable/round_hollow_borders">
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/groupMemberNameSpin1"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:hintText="Click to search clients" />
+
+            <ImageView
+                android:id="@+id/search_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingRight="20dp"
+                android:layout_weight="1"
+                app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
+
+        </LinearLayout>
 
 
        <!-- <TextView
@@ -48,20 +110,14 @@
             android:layout_width="170dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
+            android:layout_marginTop="30dp"
             android:layout_weight="1"
             android:ems="28"
             android:hint="Type amount here"
-            android:inputType="number|numberDecimal"
+            android:inputType="numberSigned|number|numberDecimal"
             android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/confirmDisbursementBtn"
-            android:layout_width="170dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:text="Disburse"
-            android:textAlignment="center" />
+
 
     </LinearLayout>
 
@@ -71,57 +127,132 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginStart="10dp">
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Interest rate"
+                android:layout_marginRight="100dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment period: Days"
+                android:layout_marginEnd="1dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/interest_rate_view"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="120dp"
+                android:layout_marginBottom="15dp"
+                android:hint="0%"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/custom_period"
+                android:layout_width="130dp"
+                android:layout_height="70dp"
+                android:layout_marginEnd="10dp"
+                android:hint="(30dys default)"
+                android:inputType="number"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Max cash available"
+                android:layout_marginTop="3dp"/>
+            <TextView
+                android:id="@+id/maxcash_txtvw"
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="$0.00"
+                android:layout_marginTop="3dp"/>
+        </LinearLayout>
+
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Interest rate"
-            android:layout_marginTop="40dp"/>
+            android:text="Adjust % rate"
+            android:layout_marginTop="20dp"/>
 
-        <TextView
-            android:id="@+id/interest_rate_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="100%"
-            android:layout_marginBottom="15dp"
-            android:textSize="30sp"
-            android:textAlignment="center"/>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_gravity="center">
+
 
 
             <Button
                 android:id="@+id/minus_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:text="-"
-                android:layout_marginEnd="15dp"
-                android:textSize="25sp"/>
+                android:layout_marginEnd="5dp"
+                android:textSize="15sp"/>
 
             <Button
                 android:id="@+id/save_interest_rate_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Save"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 />
 
             <Button
                 android:id="@+id/plus_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:text="+"
-                android:layout_marginStart="15dp"
-                android:textSize="25sp"
+                android:layout_marginStart="5dp"
+                android:textSize="15sp"
                 />
 
 
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/confirmDisbursementBtn"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="Disburse"
+            android:layout_marginBottom="15dp"
+            android:textAlignment="center" />
+
     </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
+
+
 
 </LinearLayout>

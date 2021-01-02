@@ -42,8 +42,8 @@ public class Register extends AppCompatActivity {
         mLicensedtotag = (TextView) findViewById(R.id.licensed_To_tag);
         mFullaname = (EditText) findViewById(R.id.full_name_EdtTxt);
         mEmail = (EditText) findViewById(R.id.email_edit_Txt);
-        mPassword = (EditText) findViewById(R.id.password_edit_Txt);
-        mConfirmpassword = (EditText) findViewById(R.id.confirm_password);
+        mPassword = (EditText) findViewById(R.id.password_edtdtxt);
+        mConfirmpassword = (EditText) findViewById(R.id.passwordconf_edtdtxt);
         mLoadingBar = new ProgressDialog(Register.this);
         mRegister = (Button) findViewById(R.id.register_btn);
         mAlreadyregistered = (TextView) findViewById(R.id.already_registrd_txtVw);
@@ -85,7 +85,7 @@ public class Register extends AppCompatActivity {
                         mPassword.setError("Password must be at least 4 characters");
                         return;
                     }
-                    if (confirmpassword.isEmpty() || !confirmpassword.equals(password)) {
+                    if (confirmpassword.isEmpty() || !String.valueOf(password).equals(String.valueOf(confirmpassword))) {
                         mConfirmpassword.setError("Passwords do not match!");
                         return;
                     }
@@ -111,6 +111,7 @@ public class Register extends AppCompatActivity {
                                 mLoadingBar.hide();
                                 Toast.makeText(Register.this, "User created.", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(getApplicationContext(), com.tafrica.mopapov2.DeviceConfig.WelcomenSetup.class));
+                                finish();
 
                             } else {
                                 mLoadingBar.hide();
@@ -131,6 +132,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), com.tafrica.mopapov2.DeviceConfig.WelcomenSetup.class));
+                finish();
 
             }
         });

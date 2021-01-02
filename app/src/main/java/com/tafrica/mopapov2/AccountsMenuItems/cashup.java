@@ -1,61 +1,49 @@
 package com.tafrica.mopapov2.AccountsMenuItems;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ProgressDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.tafrica.mopapov2.AccountsMenuItems.DebtorsAccountsInterface.IFFirebaseLoadComplete;
-import com.tafrica.mopapov2.AccountsMenuItems.DebtorsAccountsModel.DebtorsAccountsInfo;
-import com.tafrica.mopapov2.BaseActivity;
-import com.tafrica.mopapov2.BranchSelectorModel.BranchSelector;
-import com.tafrica.mopapov2.BranchTotalizer;
-import com.tafrica.mopapov2.ClientsMenuItems.Client;
-import com.tafrica.mopapov2.R;
-import com.tafrica.mopapov2.RecepitMenuItems.receipt;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.tafrica.mopapov2.AccountsMenuItems.CashupModel.CahsupModelclass;
+import com.tafrica.mopapov2.BaseActivity;
+import com.tafrica.mopapov2.DatedPickerFragment;
+import com.tafrica.mopapov2.R;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
-public class cashup extends BaseActivity  {
+public class cashup extends BaseActivity  implements DatePickerDialog.OnDateSetListener {
 
-    BranchTotalizer branchTotalizer;
-    DatabaseReference totalizerRef,clientsRef;
-    TextView mTotalizerview,mTotalcollections,mTotalcashconsign,mBalance;
-    EditText mTransportexpns,
+    CahsupModelclass branchTotalizer,modelclass;
+    DatabaseReference totalizerRef,clientsRef,PaymentsRef,CashupsRef,LiquidCashRef;
+    TextView mTotalizerview,mTotalcollections,mTotalcashconsign,mBalance,mChosendate;
+    EditText mTransportexpns,mOtherIncomes,
             mLunchexpns,mAirtimexpns,mOtherexpns,mDisbursemntexpns,mCashinhand;
     Button mCalculate,mSubmitbreakdown;
     String branchname,companyname;
+    LinearLayout mSelectDate;
 
 
     @Override
@@ -71,38 +59,71 @@ public class cashup extends BaseActivity  {
         mOtherexpns = (EditText) findViewById(R.id.other_expns_edttxt);
         mDisbursemntexpns = (EditText) findViewById(R.id.disbursement_expns_edttxt);
         mCashinhand = (EditText) findViewById(R.id.cashin_hand_expns_edtxt);
+        mOtherIncomes = (EditText) findViewById(R.id.incomes_other_edttxt) ;
         mBalance = (TextView) findViewById(R.id.balance_expense_txtVw);
         mCalculate =(Button) findViewById(R.id.calculate_btn);
         mSubmitbreakdown =(Button) findViewById(R.id.submit_btn);
+        mSelectDate = (LinearLayout) findViewById(R.id.select_date_linear_btn) ;
+        mChosendate = (TextView) findViewById(R.id.date_txtvw) ;
 
 
         mTotalizerview = (TextView) findViewById(R.id.total_collection_txtvw);
         SharedPreferences sp = getApplicationContext().getSharedPreferences("DEVICE_PREFS",Context.MODE_PRIVATE);
         branchname = sp.getString("branchnam","");
         companyname = sp.getString("companynam","");
+
         SharedPreferences spp = getApplicationContext().getSharedPreferences("DEVICE_PREFS",Context.MODE_PRIVATE);
         String postmanurl = spp.getString("sheetspostman","");
-        //branchenvirovw = (TextView) findViewById(R.id.branch_Enviro_TxtVw);
-        //branchenvirovw.setText("Branch:"+ branchname);
+
         //Init Db
         //totalizerRef = FirebaseDatabase.getInstance().getReference(companyname+ " totalizers").child(branchname);
         totalizerRef = FirebaseDatabase.getInstance().getReference("user").child(FirebaseAuth.getInstance().getUid())
-        .child(companyname+ " Totalizers").child(branchname);
+        .child(companyname+ " cashups").child(branchname);
         totalizerRef.keepSynced(true);
         //clientsRef = FirebaseDatabase.getInstance().getReference(companyname+" debtors accounts").child(branchname);
         clientsRef = FirebaseDatabase.getInstance().getReference("user").child(FirebaseAuth.getInstance().getUid())
         .child(companyname+" debtors accounts").child(branchname);
         clientsRef.keepSynced(true);
 
+        CashupsRef = FirebaseDatabase.getInstance().getReference("user").child(FirebaseAuth.getInstance().getUid())
+                .child(companyname+" cashups").child(branchname);
+        clientsRef.keepSynced(true);
+        LiquidCashRef = FirebaseDatabase.getInstance().getReference("user").child(FirebaseAuth.getInstance().getUid())
+                .child(companyname+" liquid account").child(branchname).child("liquidcash");
+        LiquidCashRef.keepSynced(true);
 
-        totalizerRef.addValueEventListener(new ValueEventListener() {
+        //Set the date to today's date
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        String currentdate = DateFormat.getDateInstance().format(calendar.getTime());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        currentdate = simpleDateFormat.format(calendar.getTime());
+        mChosendate.setText(currentdate);
+
+
+        //Listen for the selected Date's total collection value and display the total collection value in the total collection textview field
+        totalizerRef.child(currentdate).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                branchTotalizer = dataSnapshot.getValue(BranchTotalizer.class);
-               // String total = branchTotalizer.getTotalcollections();
-               // Double totaldbl = Double.parseDouble(total);
+                try{
+                branchTotalizer = dataSnapshot.getValue(CahsupModelclass.class);
+                mTotalizerview.setText(branchTotalizer.getTotalcollection().toString());}
 
-                mTotalizerview.setText(branchTotalizer.getTotalcollections().toString());
+                catch (Exception e){
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(cashup.this);
+                    builder.setMessage("No records found for the chosen date!");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
+
+                }
             }
 
             @Override
@@ -111,8 +132,18 @@ public class cashup extends BaseActivity  {
             }
         });
 
+        mSelectDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DialogFragment datepicker = new DatedPickerFragment();
+                datepicker.show(getSupportFragmentManager(),"datepicker");
+
+            }
+        });
 
 
+        //Calculate shortfall based on entered received and and expenses amounts
         mCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,6 +159,9 @@ public class cashup extends BaseActivity  {
                 else if(mAirtimexpns.getText().toString().isEmpty()){
                     mAirtimexpns.setError("An amount is required");
                 }
+                else if(mOtherIncomes.getText().toString().isEmpty()){
+                    mOtherIncomes.setError("An amount is required");
+                }
                 else if(mOtherexpns.getText().toString().isEmpty()){
                     mOtherexpns.setError("An amount is required");
                 }
@@ -140,23 +174,20 @@ public class cashup extends BaseActivity  {
                 else if(mTotalcashconsign.getText().toString().isEmpty()){
                     mCashinhand.setError("An amount is required");
                 }
-
-
                 else
                 {
-
                     try{
                         Double totalcollection = Double.parseDouble(mTotalcollections.getText().toString());
                         Double totalconsignment = Double.parseDouble(mTotalcashconsign.getText().toString());
                         Double transport = Double.parseDouble(mTransportexpns.getText().toString());
+                        Double otherIncomes = Double.parseDouble(mOtherIncomes.getText().toString());
                         Double lunch = Double.parseDouble(mLunchexpns.getText().toString());
                         Double airtime = Double.parseDouble(mAirtimexpns.getText().toString());
                         Double other = Double.parseDouble(mOtherexpns.getText().toString());
                         Double disbursementexpns = Double.parseDouble(mDisbursemntexpns.getText().toString());
                         Double cashinhan = Double.parseDouble(mCashinhand.getText().toString());
-                        Double balance = ((totalcollection+totalconsignment)-(transport+lunch+airtime+other+disbursementexpns+cashinhan));
+                        Double balance = ((totalcollection+totalconsignment+otherIncomes)-(transport+lunch+airtime+other+disbursementexpns+cashinhan));
                         mBalance.setText(balance.toString());
-
                     }
 
                     catch (NumberFormatException e){
@@ -171,21 +202,10 @@ public class cashup extends BaseActivity  {
                         });
                         AlertDialog alert = builder.create();
                         alert.show();
-
-
                     }
-
-
-
                 }
             }
         });
-
-
-
-
-
-
 
         mSubmitbreakdown.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,22 +224,46 @@ public class cashup extends BaseActivity  {
                         alert.show();
 
                     } else {
-                        if (!postmanurl.isEmpty()) {
-
                             Double totalcollection = Double.parseDouble(mTotalcollections.getText().toString());
                             Double totalconsignment = Double.parseDouble(mTotalcashconsign.getText().toString());
+                            Double otherincomes = Double.parseDouble(mOtherIncomes.getText().toString());
                             Double transport = Double.parseDouble(mTransportexpns.getText().toString());
                             Double lunch = Double.parseDouble(mLunchexpns.getText().toString());
                             Double airtime = Double.parseDouble(mAirtimexpns.getText().toString());
                             Double other = Double.parseDouble(mOtherexpns.getText().toString());
                             Double disbursementexpns = Double.parseDouble(mDisbursemntexpns.getText().toString());
                             Double cashinhan = Double.parseDouble(mCashinhand.getText().toString());
-                            Double balance = ((totalcollection + totalconsignment) - (transport + lunch + airtime + other + disbursementexpns + cashinhan));
-                            mBalance.setText(balance.toString());
+                            Double balance = ((totalcollection + totalconsignment+otherincomes) - (transport + lunch + airtime + other + disbursementexpns + cashinhan));
+                            CahsupModelclass modelclass = new CahsupModelclass();
+                            modelclass.setTotalcollection(totalcollection.toString());
+                            modelclass.setTotalcashcogn(totalconsignment.toString());
+                            modelclass.setOther1(otherincomes.toString());
+                            modelclass.setTrnasport(transport.toString());
+                            modelclass.setLunch(lunch.toString());
+                            modelclass.setAirtime(airtime.toString());
+                            modelclass.setDisbursements(disbursementexpns.toString());
+                            modelclass.setOther2(other.toString());
+                            modelclass.setCashinhand(cashinhan.toString());
+                            modelclass.setShortfall(balance.toString());
+                            modelclass.setCashupdate(mChosendate.getText().toString());
+                            CashupsRef.child(mChosendate.getText().toString()).setValue(modelclass);
 
-                            postToSheet();
-                            resetDebtorsDatabase();
-                            resetTotalizer();
+                            LiquidCashRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    String currentcashaount = dataSnapshot.getValue(String.class);
+                                    String submitedcashmoney = cashinhan.toString();
+                                    Double dobcurrentcashaount = Double.parseDouble(currentcashaount);
+                                    Double submitedcash = Double.parseDouble(submitedcashmoney);
+                                    Double newcashamount = (dobcurrentcashaount+submitedcash);
+                                    LiquidCashRef.setValue(newcashamount+"");
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
                             mTotalcashconsign.setText("");
                             mTransportexpns.setText("");
                             mLunchexpns.setText("");
@@ -227,43 +271,13 @@ public class cashup extends BaseActivity  {
                             mDisbursemntexpns.setText("");
                             mOtherexpns.setText("");
                             mCashinhand.setText("");
-                        } else {
-                            Double totalcollection = Double.parseDouble(mTotalcollections.getText().toString());
-                            Double totalconsignment = Double.parseDouble(mTotalcashconsign.getText().toString());
-                            Double transport = Double.parseDouble(mTransportexpns.getText().toString());
-                            Double lunch = Double.parseDouble(mLunchexpns.getText().toString());
-                            Double airtime = Double.parseDouble(mAirtimexpns.getText().toString());
-                            Double other = Double.parseDouble(mOtherexpns.getText().toString());
-                            Double disbursementexpns = Double.parseDouble(mDisbursemntexpns.getText().toString());
-                            Double cashinhan = Double.parseDouble(mCashinhand.getText().toString());
-                            Double balance = ((totalcollection + totalconsignment) - (transport + lunch + airtime + other + disbursementexpns + cashinhan));
-                            mBalance.setText(balance.toString());
-                            resetDebtorsDatabase();
-                            resetTotalizer();
-                            mTotalcashconsign.setText("");
-                            mTransportexpns.setText("");
-                            mLunchexpns.setText("");
-                            mAirtimexpns.setText("");
-                            mDisbursemntexpns.setText("");
-                            mOtherexpns.setText("");
-                            mCashinhand.setText("");
+                            mOtherIncomes.setText("");
 
-
-                        }
+                        Toast.makeText(cashup.this,"Cashup submitted",Toast.LENGTH_LONG).show();
                     }
                 }
 
                 catch (Exception e){
-                   /* AlertDialog.Builder builder = new AlertDialog.Builder(cashup.this);
-                    builder.setMessage("Please calculate before submitting");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-
-                        }
-                    });
-                    AlertDialog alert = builder.create();
-                    alert.show();*/
                    Log.e("Cashup","Cashup submission failed",e);
 
                 }
@@ -272,61 +286,7 @@ public class cashup extends BaseActivity  {
 
     }
 
-    private void resetTotalizer() {
-
-        try{
-        BranchTotalizer branch = new BranchTotalizer();
-        branch.setTotalcollections("0");
-
-        totalizerRef.setValue(branch);}
-
-        catch (Exception e){
-            System.out.println("Error!");
-        }
-    }
-
-    private void resetDebtorsDatabase() {
-        clientsRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Iterator<DataSnapshot> items = dataSnapshot.getChildren().iterator();
-                while (items.hasNext()){
-                    DataSnapshot item = items.next();
-                    String name,loanamount,dailypaidamount,amountdue,disbursementdate,duedate,paidamount,principal;
-                    name = item.child("name").getValue().toString();
-                    loanamount =item.child("loanamount").getValue().toString();
-                    dailypaidamount ="0";
-                    amountdue = item.child("amountdue").getValue().toString();
-                    disbursementdate = item.child("disbursementdate").getValue().toString();
-                    duedate = item.child("duedate").getValue().toString();
-                    paidamount = item.child("paidamount").getValue().toString();
-                    principal =  item.child("principal").getValue().toString();
-
-                    DebtorsAccountsInfo debtorsAccountsInfo = new DebtorsAccountsInfo();
-                    debtorsAccountsInfo.setName(name);
-                    debtorsAccountsInfo.setLoanamount(loanamount);
-                    debtorsAccountsInfo.setDailypaidamount(dailypaidamount);
-                    debtorsAccountsInfo.setAmountdue(amountdue);
-                    debtorsAccountsInfo.setDisbursementdate(disbursementdate);
-                    debtorsAccountsInfo.setDuedate(duedate);
-                    debtorsAccountsInfo.setPaidamount(paidamount);
-                    debtorsAccountsInfo.setPrincipal(principal);
-
-                    clientsRef.child(name).setValue(debtorsAccountsInfo);
-                }
-
-                clientsRef.removeEventListener(this);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
-
+    /*##################################DISCONTINUED###############################################
     private void postToSheet() {
 
 
@@ -397,6 +357,49 @@ public class cashup extends BaseActivity  {
         RequestQueue queue = Volley.newRequestQueue(this);
 
         queue.add(stringRequest);
+    }############################################################################################### */
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR,i);
+        cal.set(Calendar.MONTH,i1);
+        cal.set(Calendar.DAY_OF_MONTH,i2);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String currentDateString = simpleDateFormat.format(cal.getTime());
+        mChosendate.setText(currentDateString);
+
+        CashupsRef.child(mChosendate.getText().toString()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                try{modelclass = dataSnapshot.getValue(CahsupModelclass.class);
+                mTotalizerview.setText(modelclass.getTotalcollection().toString());}
+
+                catch (Exception e){
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(cashup.this);
+                    builder.setMessage("No records found for the chosen date!");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 }
 

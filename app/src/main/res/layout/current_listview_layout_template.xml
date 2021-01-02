@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:layout_margin="8dp"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/current_balance_lstvw_item"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center" />
+    <TextView
+        android:id="@+id/current_client_name_lstvw_item"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="textStart" />
+
+
+</LinearLayout>

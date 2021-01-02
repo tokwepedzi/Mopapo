@@ -33,8 +33,9 @@
         android:layout_height="20dp"
         android:layout_weight="1"
         android:ems="28"
+        android:singleLine="true"
         android:textAlignment="textStart"
-        android:textSize="12sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/branch_name_txtvw"
@@ -49,8 +50,9 @@
         android:layout_weight="1"
         android:ems="28"
         android:inputType="text"
+        android:singleLine="true"
         android:textAlignment="textStart"
-        android:textSize="12sp" />
+        android:textSize="18sp" />
 
 
 
@@ -66,8 +68,9 @@
         android:layout_height="20dp"
         android:layout_weight="1"
         android:ems="28"
+        android:singleLine="true"
         android:textAlignment="textStart"
-        android:textSize="12sp"/>
+        android:textSize="18sp" />
 
 
 
@@ -84,8 +87,9 @@
         android:layout_height="20dp"
         android:layout_weight="1"
         android:ems="28"
+        android:singleLine="true"
         android:textAlignment="textStart"
-        android:textSize="12sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/collateralItemsTextView"
@@ -100,8 +104,9 @@
         android:layout_weight="1"
         android:ems="28"
         android:inputType="number"
+        android:singleLine="true"
         android:textAlignment="textStart"
-        android:textSize="12sp" />
+        android:textSize="18sp" />
 
 
 
@@ -119,8 +124,9 @@
         android:layout_weight="1"
         android:ems="28"
         android:inputType="textEmailAddress"
+        android:singleLine="true"
         android:textAlignment="textStart"
-        android:textSize="12sp" />
+        android:textSize="18sp"/>
 
 
 

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,13 +22,45 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cashup"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
         android:textAlignment="center"
-        android:textSize="25sp"/>
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"/>
+
+    <LinearLayout
+        android:id="@+id/select_date_linear_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/date_txtvw"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="DD/MM/YYYY"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/calender_icon_imgvw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_calendar" />
+
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -68,6 +107,36 @@
 
 
     </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Other Income"
+        android:textSize="10sp"
+        />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textStart"
+        android:textSize="17sp"
+        android:text="Incomes (Other)"
+        android:height="35dp"/>
+        <EditText
+            android:id="@+id/incomes_other_edttxt"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:height="35dp"
+            android:inputType="numberDecimal"
+            android:textSize="17sp" />
+    </RelativeLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -287,3 +356,4 @@
 
 
 </LinearLayout>
+</ScrollView>

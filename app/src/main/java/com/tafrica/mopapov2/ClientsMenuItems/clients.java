@@ -59,10 +59,12 @@ public class clients extends BaseActivity {
     public  void newVerification(){
         Intent intent = new Intent(this, com.tafrica.mopapov2.ClientsMenuItems.verification.class);
         startActivity(intent);
+        //finish();
     }
 
     public void clientView_mthd(){
         Intent intent = new Intent(this, com.tafrica.mopapov2.ClientsMenuItems.clientsview.class);
         startActivity(intent);
+        //finish();
     }
 }

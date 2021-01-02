@@ -10,7 +10,7 @@ import com.tafrica.mopapov2.R;
 
 public class accounts extends BaseActivity {
 
-    RelativeLayout rlbtn1,rlbtn2,rlbt3;
+    RelativeLayout rlbtn1,mManageCashbtn,rlbt3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,7 @@ public class accounts extends BaseActivity {
         setContentView(R.layout.activity_accounts);
 
         rlbtn1 = (RelativeLayout) findViewById(R.id.loanDisbursementBtn);
-        //rlbtn1 = (RelativeLayout) findViewById(R.id.cashConsignmentBtn);
+        mManageCashbtn = (RelativeLayout) findViewById(R.id.managecashBtn);
         rlbt3 = (RelativeLayout) findViewById(R.id.cashUpBtn);
 
         rlbtn1.setOnClickListener(new View.OnClickListener() {
@@ -35,17 +35,32 @@ public class accounts extends BaseActivity {
             }
         });
 
+        mManageCashbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openCashManagerScrceen();
+            }
+        });
 
+
+    }
+
+    private void openCashManagerScrceen() {
+        Intent intent = new Intent(this, com.tafrica.mopapov2.AccountsMenuItems.CashManager.class);
+        startActivity(intent);
+        //finish();
     }
 
     public void openDisbursementScreen(){
         Intent intent = new Intent(this, com.tafrica.mopapov2.AccountsMenuItems.disbursement.class);
         startActivity(intent);
+        //finish();
     }
 
     public void openCahsupscreen(){
         Intent intent = new Intent(this, com.tafrica.mopapov2.AccountsMenuItems.cashup.class);
         startActivity(intent);
+        //finish();
 
     }
 

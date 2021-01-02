@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
 
 import com.mazenrashed.printooth.Printooth;
 import com.mazenrashed.printooth.data.printable.Printable;
@@ -37,6 +39,7 @@ public class MopapoPrinter extends BaseActivity implements PrintingCallback {
     String clientname;
     String industryname;
     String companyname;
+    SwitchCompat mSwitch;
     SharedPreferences sp;
 
 
@@ -58,6 +61,7 @@ public class MopapoPrinter extends BaseActivity implements PrintingCallback {
         mLoanbalance = (TextView) findViewById(R.id.loan_balance_field_rcpt);
         mDate = (TextView) findViewById(R.id.date_field_rcpt);
         mTime = (TextView) findViewById(R.id.time_field_rcpt);
+        mSwitch = (SwitchCompat) findViewById(R.id.co_name_print_swtch);
         mClientname.setText(clientname);
         mPaidamount.setText(paidamount);
         mLoanbalance.setText(loanbalance);
@@ -66,6 +70,28 @@ public class MopapoPrinter extends BaseActivity implements PrintingCallback {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("DEVICE_PREFS", Context.MODE_PRIVATE);
          industryname = sp.getString("industrynam","");
          companyname = sp.getString("companynam","");
+         //Save switch state
+        SharedPreferences printpref = getSharedPreferences("save",MODE_PRIVATE);
+        mSwitch.setChecked(printpref.getBoolean("value",false));
+        mSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mSwitch.isChecked()){
+                    //When switch checked
+                    SharedPreferences.Editor editor = getSharedPreferences("save",MODE_PRIVATE).edit();
+                    editor.putBoolean("value",true);
+                    editor.apply();
+                    mSwitch.setChecked(true);
+                }else {
+                    //When swithc is unchecked
+                    SharedPreferences.Editor editor = getSharedPreferences("save",MODE_PRIVATE).edit();
+                    editor.putBoolean("value",false);
+                    editor.apply();
+                    mSwitch.setChecked(false);
+                }
+
+            }
+        });
 
 
         Printooth.INSTANCE.init(this);
@@ -112,6 +138,7 @@ public class MopapoPrinter extends BaseActivity implements PrintingCallback {
 
         //add text
 
+       if(mSwitch.isChecked()){
         printables.add(new TextPrintable.Builder()
                 .setText(companyname)
                 .setLineSpacing(DefaultPrinter.Companion.getLINE_SPACING_60())
@@ -156,7 +183,49 @@ public class MopapoPrinter extends BaseActivity implements PrintingCallback {
                 .setText("================================")
                 .setCharacterCode(DefaultPrinter.Companion.getCHARCODE_PC1252())
                 .setNewLinesAfter(1)
-                .build());
+                .build());}
+
+       else {
+
+           printables.add(new TextPrintable.Builder()
+                   .setText(mDate.getText().toString()+" Time: "+mTime.getText().toString())
+                   .setLineSpacing(DefaultPrinter.Companion.getLINE_SPACING_60())
+                   .setAlignment(DefaultPrinter.Companion.getALIGNMENT_CENTER())
+                   .setEmphasizedMode(DefaultPrinter.Companion.getEMPHASIZED_MODE_BOLD())
+                   .setNewLinesAfter(1)
+                   .build());
+           printables.add(new TextPrintable.Builder()
+                   .setText("********************************")
+                   .setCharacterCode(DefaultPrinter.Companion.getCHARCODE_PC1252())
+                   .setNewLinesAfter(1)
+                   .build());
+           printables.add(new TextPrintable.Builder()
+                   .setText("CUSTOMER DETAILS: "+ mClientname.getText().toString())
+                   .setCharacterCode(DefaultPrinter.Companion.getCHARCODE_PC1252())
+                   .setNewLinesAfter(1)
+                   .build());
+           printables.add(new TextPrintable.Builder()
+                   .setText("================================")
+                   .setCharacterCode(DefaultPrinter.Companion.getCHARCODE_PC1252())
+                   .setNewLinesAfter(1)
+                   .build());
+           printables.add(new TextPrintable.Builder()
+                   .setText("AMOUNT PAID: USD "+mPaidamount.getText().toString())
+                   .setCharacterCode(DefaultPrinter.Companion.getCHARCODE_PC1252())
+                   .setNewLinesAfter(1)
+                   .build());
+           printables.add(new TextPrintable.Builder()
+                   .setText("------ LOAN BALANCE: USD "+mLoanbalance.getText().toString())
+                   .setCharacterCode(DefaultPrinter.Companion.getCHARCODE_PC1252())
+                   .setNewLinesAfter(1)
+                   .build());
+           printables.add(new TextPrintable.Builder()
+                   .setText("================================")
+                   .setCharacterCode(DefaultPrinter.Companion.getCHARCODE_PC1252())
+                   .setNewLinesAfter(1)
+                   .build());
+
+       }
         Printooth.INSTANCE.printer().print(printables);
         //mPrinting.print(printables);
     }

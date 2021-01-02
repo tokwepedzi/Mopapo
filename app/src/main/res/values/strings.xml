@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Mopapo-microfin</string>
+    <string-array name="cashmanageoptions">
+        <item>Add Capital</item>
+        <item>Withdraw Cash</item>
+    </string-array>
 </resources>

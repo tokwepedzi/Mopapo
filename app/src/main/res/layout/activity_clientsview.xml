@@ -5,16 +5,417 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_gravity="center"
+    tools:context=".ClientsMenuItems.clientsview">
+
+    <LinearLayout
+        android:id="@+id/searchable_linear"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_gravity="center"
+        android:background="@drawable/round_hollow_borders">
+
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/searchable_spinner"
+            android:layout_width="240dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:outlineSpotShadowColor="@color/colorPrimaryDark"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:hintText="Click to search clients" />
+
+        <ImageView
+            android:id="@+id/search_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            app:cardBackgroundColor="@color/text_black">
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/profile_header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent">
+
+        <RelativeLayout
+            android:id="@+id/profile_rel_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/prof_pic"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/userprofpic"
+                app:civ_border_color="@color/colorAccent"
+                app:civ_border_width="2dp" />
+            <TextView
+                android:layout_marginTop="25dp"
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:hint="Name"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:layout_below="@id/prof_pic"/>
+
+
+        </RelativeLayout>
+
+
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        >
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Loan details"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/loan_details_txtvw"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:fontFamily="sans-serif-light"
+                            android:hint="Loan details"
+                            android:textColor="#000000"
+                            android:textSize="20sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/light_gray" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Residential address"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/res_address_txtvw"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:hint="Address "
+                                android:textColor="#000000"
+                                android:textSize="20sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@color/light_gray" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Cell number"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/cell_num_txtvw"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:hint="Cell number"
+                                android:inputType="number"
+                                android:textColor="#000000"
+                                android:textSize="20sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@color/light_gray" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="ID number"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/id_num_txtvw"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:hint="ID number "
+                                android:textColor="#000000"
+                                android:textSize="20sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@color/light_gray" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Cell group name"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/grp_name_txtvw"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:hint="Cell group name "
+                                android:textColor="#000000"
+                                android:textSize="20sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@color/light_gray" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Collateral items"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/collateral_txtvw"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:hint="View collateral items"
+                                android:textColor="#000000"
+                                android:textSize="20sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:layout_marginTop="10dp"
+                                android:background="#000000" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Name of next of kin"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/next_kin_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:hint="Next of kin's name "
+                                android:textColor="#000000"
+                                android:textSize="20sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@color/light_gray" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Address of next of kin"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/nxt_kin_addresstxtvw"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:hint="Next of kin's address "
+                                android:textColor="#000000"
+                                android:textSize="20sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@color/light_gray" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Next of kin's cell number"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/nextkin_cellnum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:hint="Next of kin's cell number "
+                                android:textColor="#000000"
+                                android:textSize="20sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@color/light_gray" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+
+
+
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+
+<!--
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="10dp"
     tools:context=".ClientsMenuItems.clientsview">
 
-    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-        android:layout_width="200dp"
-        android:layout_height="70dp"
+    <LinearLayout
+        android:id="@+id/searchable_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_gravity="center"
-        android:id="@+id/searchable_spinner"
-        android:layout_marginTop="10dp"
-        app:hintText="Search clients" />
+        android:layout_marginTop="25dp"
+        android:background="@drawable/round_hollow_borders">
+
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/searchable_spinner"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:outlineSpotShadowColor="@color/colorPrimaryDark"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:hintText="Click to search clients" />
+
+        <ImageView
+            android:id="@+id/search_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingRight="20dp"
+            android:layout_weight="1"
+            app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
+
+    </LinearLayout>
 
     <RelativeLayout
     android:layout_width="match_parent"
@@ -25,6 +426,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Client name:"
+        android:layout_marginTop="50dp"
         android:textSize="17sp"/>
 
     <TextView
@@ -248,4 +650,4 @@
             android:textSize="17sp" />
     </RelativeLayout>
 
-</LinearLayout>
+</LinearLayout>-->

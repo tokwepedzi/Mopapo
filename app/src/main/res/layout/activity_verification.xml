@@ -8,167 +8,253 @@
     tools:context=".ClientsMenuItems.verification">
 
 
-    <TextView
-        android:id="@+id/clientFullNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Client's full name" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/fullNameEditText"
-        android:layout_weight="1"
-        android:ems="28"
-        android:textAlignment="textStart"
-        android:textSize="12sp"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
 
 
-    <TextView
-        android:id="@+id/clientIdNumTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Client's ID number" />
 
-    <EditText
-        android:id="@+id/idNumEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="28"
-        android:textAlignment="textStart"
-        android:textSize="12sp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name of client"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="13sp" />
 
+                <EditText
+                    android:id="@+id/fullNameEditText"
+                    android:layout_width="match_parent"
+                    android:hint="Client name"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/clientcellNumTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Client's cell number" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ID number"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp" />
 
-    <EditText
-        android:id="@+id/clientcellNumEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="28"
-        android:inputType="number"
-        android:textAlignment="textStart"
-        android:textSize="12sp" />
+                    <EditText
+                        android:id="@+id/idNumEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:hint="ID number "
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cell number"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp" />
 
-    <TextView
-        android:id="@+id/clientPhysicalAddressTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Client's physical address" />
+                    <EditText
+                        android:id="@+id/clientcellNumEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:hint="Cell number"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/physicalAddressEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="28"
-        android:textAlignment="textStart"
-        android:textSize="12sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Residential address"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp" />
 
-
-
-    <TextView
-        android:id="@+id/groupNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Group name" />
-
-    <EditText
-        android:id="@+id/groupNameEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="28"
-        android:textAlignment="textStart"
-        android:textSize="12sp"/>
-
-
-
-    <TextView
-        android:id="@+id/collateralItemsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Client's collateral items" />
-
-    <EditText
-        android:id="@+id/collateralItemsEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="28"
-        android:textAlignment="textStart"
-        android:textSize="12sp"/>
-
-
-
-    <TextView
-        android:id="@+id/nextOfKinTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Next of kin's name"
-        android:height="15dp"/>
-
-    <EditText
-        android:id="@+id/nextOfKinEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="28"
-        android:textAlignment="textStart"
-        android:textSize="12sp"/>
+                    <EditText
+                        android:id="@+id/physicalAddressEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:hint="Address "
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                </LinearLayout>
 
 
 
-    <TextView
-        android:id="@+id/nextOfKinAddressTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Next of kin's address"
-        android:height="15dp"/>
-
-    <EditText
-        android:id="@+id/nextOfKinAddressEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="28"
-        android:textAlignment="textStart"
-        android:textSize="12sp" />
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/nextOfKinCellTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Next of kin's cell number"
-        android:height="15dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cell group name"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp" />
 
-    <EditText
-        android:id="@+id/nextOfKinCellNumEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="28"
-        android:textAlignment="textStart"
-        android:textSize="12sp"/>
+                    <EditText
+                        android:id="@+id/groupNameEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:hint="Cell group name "
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Collateral items"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp" />
+
+                    <EditText
+                        android:id="@+id/collateralItemsEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:hint="View collateral items"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name of next of kin"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp" />
+
+                    <EditText
+                        android:id="@+id/nextOfKinEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:hint="Next of kin's name "
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Address of next of kin"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp" />
+
+                    <EditText
+                        android:id="@+id/nextOfKinAddressEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:hint="Next of kin's address "
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Next of kin's cell number"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp" />
+
+                    <EditText
+                        android:id="@+id/nextOfKinCellNumEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:hint="Next of kin's cell number "
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
 
-    <Button
-        android:id="@+id/verificationFormSaveBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save" />
+                </LinearLayout>
+                <Button
+                    android:id="@+id/verificationFormSaveBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="save info"/>
+
+            </LinearLayout>
+
+
+
+
+        </RelativeLayout>
+
+
+
+
+
+
+    </ScrollView>
+
 
 
 </LinearLayout>

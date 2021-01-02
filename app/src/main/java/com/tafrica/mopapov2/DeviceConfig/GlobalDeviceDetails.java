@@ -3,10 +3,6 @@ package com.tafrica.mopapov2.DeviceConfig;
 import android.app.Application;
 
 import com.google.firebase.database.FirebaseDatabase;
-import com.tafrica.mopapov2.LogoutListener;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class GlobalDeviceDetails extends Application {
     @Override
@@ -15,6 +11,7 @@ public class GlobalDeviceDetails extends Application {
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
     }
+    /*
     private LogoutListener listener;
     Timer timer;
 
@@ -24,7 +21,7 @@ public class GlobalDeviceDetails extends Application {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                listener.onSessionLogout();
+                //listener.onSessionLogout();
 
 
             }

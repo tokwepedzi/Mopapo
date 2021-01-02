@@ -9,16 +9,40 @@
     android:orientation="vertical"
     tools:context=".DeviceConfig.BranchSetup">
 
-    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-        android:id="@+id/selectBranchSearchbleSpinner"
-        android:layout_width="210dp"
-        android:layout_height="40dp"
+    <LinearLayout
+        android:id="@+id/searchable_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:background="#FFFF"
-        app:hintText="Select your branch name" />
+        android:layout_marginTop="25dp"
+        android:background="@drawable/round_hollow_borders">
 
-    <TextView
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/groupMemberNameSpin1"
+            android:layout_width="295dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:outlineSpotShadowColor="@color/colorPrimaryDark"
+            android:textAlignment="center"
+            android:textSize="8sp"
+            app:hintText="Click to find your branch" />
+
+        <ImageView
+            android:id="@+id/search_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingRight="10dp"
+            android:layout_weight="1"
+            app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
+
+    </LinearLayout>
+
+
+
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
@@ -33,7 +57,7 @@
         android:layout_height="35dp"
         android:layout_marginStart="10dp"
         android:textSize="20sp"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF"/>-->
 
     <TextView
         android:layout_width="wrap_content"
@@ -71,6 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="Google sheets link:"
+        android:visibility="invisible"
         android:textColor="#FFFFFF"
         android:layout_marginStart="10dp"
         android:textSize="12sp"/>
@@ -78,6 +103,7 @@
         android:id="@+id/google_sheets_post"
         android:layout_width="300dp"
         android:layout_height="40dp"
+        android:visibility="invisible"
         android:layout_marginStart="10dp"
         android:inputType="text"
         android:textSize="20sp"

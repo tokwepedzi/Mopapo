@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tafrica.mopapov2.BuildConfig;
 import com.tafrica.mopapov2.DeviceConfig.CompanyModel.Company;
 import com.tafrica.mopapov2.DeviceConfig.CompanyModel.CompanyInterface.IFFirebaseLoadDoneCompny;
 import com.tafrica.mopapov2.R;
@@ -38,14 +40,15 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
     private FadingTextView fadingTextView;
     Button mSelectyrindustry, mNextbtn;
     SearchableSpinner mSelectorganization;
-    TextView mIndustry, mCompanyname,mNeworgregister;
+    TextView mIndustry, mCompanyname,mNeworgregister,mVersionName;
+    LinearLayout mContactSupportLinearbtn;
     String[] IndustryListItems;
 
-    String companynamespinnerinput;
+    String companynamespinnerinput,supportemail,supportcell;
     private ProgressDialog mLoadingBar;
 
 
-    DatabaseReference companiesRef;
+    DatabaseReference companiesRef,SupportRef,SupportRef1;
     IFFirebaseLoadDoneCompny ifFirebaseLoadDoneCompny;
     List<Company> companies;
 
@@ -66,20 +69,53 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
         animationDrawable.setExitFadeDuration(3500);
         animationDrawable.start();
 
-        mSelectyrindustry = (Button) findViewById(R.id.selectIndstryBtn);
+        //mSelectyrindustry = (Button) findViewById(R.id.selectIndstryBtn);
         mNextbtn = (Button) findViewById(R.id.setupScreenNextBtn);
-        mSelectorganization = (SearchableSpinner) findViewById(R.id.selectOrgSearchbleSpinner);
-        mIndustry = (TextView) findViewById(R.id.industryTxtVw);
+        mSelectorganization = (SearchableSpinner) findViewById(R.id.groupMemberNameSpin1);
+        //mIndustry = (TextView) findViewById(R.id.industryTxtVw);
         mCompanyname = (TextView) findViewById(R.id.companyNameTxtVw);
         mNeworgregister = (TextView) findViewById(R.id.new_org_register_txtvw);
+        mContactSupportLinearbtn = (LinearLayout) findViewById(R.id.contact_support_wlcm);
+        mVersionName = (TextView) findViewById(R.id.versio_welcome_name) ;
         mLoadingBar = new ProgressDialog(WelcomenSetup.this);
 
 
         sharedPreferences = getSharedPreferences("DEVICE_PREFS", Context.MODE_PRIVATE);
 
+        SupportRef = FirebaseDatabase.getInstance().getReference("Support").child("email");
+        SupportRef.keepSynced(true);
+        SupportRef1 = FirebaseDatabase.getInstance().getReference("Support").child("cell");
+        SupportRef1.keepSynced(true);
 
 
-        mSelectyrindustry.setOnClickListener(new View.OnClickListener() {
+        mVersionName.setText("Version "+String.valueOf(BuildConfig.VERSION_NAME));
+
+        SupportRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                supportemail=dataSnapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        SupportRef1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                supportcell=dataSnapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+       /* mSelectyrindustry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Create list of industry items to for user to select from the alert dialog boc that will pop up
@@ -103,7 +139,7 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
                 AlertDialog mDialog = mBuilder.create();
                 mDialog.show();
             }
-        });
+        });*/
 
 
 
@@ -114,6 +150,9 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
         //Init Interface
         ifFirebaseLoadDoneCompny = this;
         //Get data
+        try {
+
+
         companiesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -131,6 +170,10 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
 
             }
         });
+        }
+        catch (Exception e){
+            Toast.makeText(WelcomenSetup.this,"Error: Please check internet connection!"+e.getMessage(),Toast.LENGTH_LONG).show();
+        }
 
 
         mSelectorganization.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -156,9 +199,9 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
                 mLoadingBar.setMessage("Please wait, registration in progress.");
                 mLoadingBar.setCanceledOnTouchOutside(true);
                 mLoadingBar.show();
-                String industry = mIndustry.getText().toString();
+              //  String industry = mIndustry.getText().toString();
                 String company = mCompanyname.getText().toString();
-                if(industry.isEmpty()){
+                /*if(industry.isEmpty()){
                     mLoadingBar.hide();
                     AlertDialog.Builder builder = new AlertDialog.Builder(WelcomenSetup.this);
                     builder.setMessage("Please select an Industry to proceed!");
@@ -170,8 +213,8 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
                     });
                     AlertDialog alert = builder.create();
                     alert.show();
-                }
-                 else if(company.isEmpty()){
+                }*/
+                if(company.isEmpty()){
                      mLoadingBar.hide();
                     AlertDialog.Builder builder = new AlertDialog.Builder(WelcomenSetup.this);
                     builder.setMessage("Please select a Company name to proceed!");
@@ -188,13 +231,14 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
                 else {
                     mLoadingBar.show();
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("industrynam",industry);
+                //editor.putString("industrynam",industry);
                 editor.putString("companynam",company);
                 editor.commit();
                 Toast.makeText(WelcomenSetup.this,"Industry and Company details saved successfully.",Toast.LENGTH_SHORT).show();
                 mLoadingBar.hide();
 
-                openBranchSetupScreen();}
+                openBranchSetupScreen();
+                finish();}
             }
         });
 
@@ -205,6 +249,35 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
             @Override
             public void onClick(View view) {
                 openRegistrationpage();
+                finish();
+
+            }
+        });
+
+        mContactSupportLinearbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    Uri uri = Uri.parse("smsto:" +supportcell);
+                    Intent i = new Intent(Intent.ACTION_SENDTO,uri);
+                    i.setPackage("com.whatsapp");
+                    startActivity(i);
+                }
+
+                catch (Exception e){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(WelcomenSetup.this);
+                    builder.setMessage("Whatsapp not found!");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
+                }
+
 
             }
         });
@@ -216,12 +289,14 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
     private void openRegistrationpage() {
         Intent intent = new Intent(this, NewOrgRegistration.class);
         startActivity(intent);
+        finish();
     }
 
 
     private void openBranchSetupScreen() {
 
         Intent intent = new Intent(this, BranchSetup.class);
+        finish();
 
 
         startActivity(intent);

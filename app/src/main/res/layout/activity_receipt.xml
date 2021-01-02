@@ -10,19 +10,67 @@
     android:gravity="top"
     tools:context=".RecepitMenuItems.receipt">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="Loan Repayment"
-        android:layout_marginTop="10dp"
         android:textAlignment="center"
-        android:textSize="25sp" />
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:gravity="center"
         android:layout_gravity="center">
+        <LinearLayout
+            android:id="@+id/selectable_linear"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/select_date_heading">
+
+            <TextView
+                android:id="@+id/date_txtvw"
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:hint="DD/MM/YYYY"
+                android:paddingEnd="30dp"
+                android:paddingBottom="5dp"
+                android:gravity="center"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/calender_icon_imgvw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:paddingBottom="5dp"
+                app:srcCompat="@drawable/ic_calendar" />
+
+        </LinearLayout>
 
 
         <!-- <TextView
@@ -34,25 +82,43 @@
              android:textSize="10sp"
              android:textAlignment="textStart"
              android:text="Received Amount (USD)" />-->
+        <LinearLayout
+            android:id="@+id/searchable_linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/round_hollow_borders">
 
-        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-            android:id="@+id/groupMemberNameSpin1"
-            android:layout_width="200dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:height="40dp"
-            android:outlineSpotShadowColor="@color/colorPrimaryDark"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            app:hintText="Search clients" />
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/groupMemberNameSpin1"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:hintText="Click to search clients" />
+
+            <ImageView
+                android:id="@+id/search_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingRight="20dp"
+                android:layout_weight="1"
+                app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
+
+        </LinearLayout>
 
         <EditText
             android:id="@+id/receivedAmountFill"
             android:layout_width="170dp"
-            android:layout_height="70dp"
+            android:layout_height="55dp"
             android:outlineProvider="bounds"
             android:layout_gravity="center"
+            android:layout_marginTop="30dp"
             android:layout_weight="1"
             android:ems="28"
             android:hint="Type amount here"
@@ -67,9 +133,10 @@
                 android:id="@+id/confirm_entries"
                 android:layout_width="150dp"
                 android:layout_height="60dp"
-                android:text="confirm"
-               android:layout_centerInParent="true"
-                android:layout_marginEnd="10dp" />
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="confirm" />
 
 
         </RelativeLayout>
@@ -84,7 +151,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/gradient2"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp">
 
 
         <TextView
@@ -136,5 +204,7 @@
 
     </LinearLayout>
 
+    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

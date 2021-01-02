@@ -1,9 +1,6 @@
 package com.tafrica.mopapov2.RecepitMenuItems;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,9 +11,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -26,37 +29,44 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.tafrica.mopapov2.AccountsMenuItems.DebtorsAccountsInterface.IFFirebaseLoadComplete;
-import com.tafrica.mopapov2.AccountsMenuItems.DebtorsAccountsModel.DebtorsAccountsInfo;
-import com.tafrica.mopapov2.BaseActivity;
-import com.tafrica.mopapov2.BranchTotalizer;
-import com.tafrica.mopapov2.ClientsMenuItems.Client;
-import com.tafrica.mopapov2.DeviceConfig.BranchSetup;
-import com.tafrica.mopapov2.DeviceConfig.GlobalDeviceDetails;
-import com.tafrica.mopapov2.Printing.MopapoPrinter;
-import com.tafrica.mopapov2.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tafrica.mopapov2.AccountsMenuItems.CashupModel.CahsupModelclass;
+import com.tafrica.mopapov2.AccountsMenuItems.DebtorsAccountsInterface.IFFirebaseLoadComplete;
+import com.tafrica.mopapov2.AccountsMenuItems.DebtorsAccountsModel.DebtorsAccountsInfo;
+import com.tafrica.mopapov2.BaseActivity;
+import com.tafrica.mopapov2.ClientsMenuItems.Client;
+import com.tafrica.mopapov2.DatedPickerFragment;
+import com.tafrica.mopapov2.PaymentModel.Payer;
+import com.tafrica.mopapov2.Printing.MopapoPrinter;
+import com.tafrica.mopapov2.R;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class receipt extends BaseActivity implements IFFirebaseLoadComplete {
+public class receipt extends BaseActivity implements IFFirebaseLoadComplete, DatePickerDialog.OnDateSetListener{
 
     SearchableSpinner searchableSpinner;
+    LinearLayout mSearchableLinear,mSelectDateLinearBtn;
     EditText mPaidAmountEdt;
     Button mConfirmentries;
-    TextView mClientnameview,mClienpaidamntview,mCurrentbalance;
-    BranchTotalizer branchTotalizer;
+    TextView mClientnameview,mClienpaidamntview,mCurrentbalance,mChosenDatetxvw;
+    CahsupModelclass branchTotalizer;
+    String storedTotal,payed;
+   // Payer payer;
 
-    DatabaseReference DebtorsRef,Debtorsref2,BranchtotalizerRef;
+    DatabaseReference DebtorsRef,Debtorsref2,BranchtotalizerRef,PaymentsRef,CashupsRef,StatsCountRef,StatsAmountRef;
     IFFirebaseLoadComplete ifFirebaseLoadComplete;
     List<Client>debtorsAccountsInfos;
     //DebtorsAccountsInfo debtor;
@@ -66,24 +76,17 @@ public class receipt extends BaseActivity implements IFFirebaseLoadComplete {
     public static final String  CLIENT_NAME = "clientname";
     public static final String  PAID_AMOUNT = "paidamount";
     public static final String  LOAN_BALANCE = "loanbalance";
-    //private String clientname;
-    //private String paidamount;
-    //private String loanbalance;
-    //GlobalDeviceDetails globalDeviceDetails;
 
    // SharedPreferences sp;
     String companyname,branchname,storedpaidamount,storedamountdue,storedloanamount
-           ,storeddailypaidamount,disbursementdate,duedate,principal;
+           ,storeddailypaidamount,disbursementdate,duedate,principal,balance,clientname,paid;
     boolean selected = false;
-
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receipt);
-        //GlobalDeviceDetails globalDeviceDetails = (GlobalDeviceDetails) getApplicationContext();
         searchableSpinner = findViewById(R.id.groupMemberNameSpin1);
         mPaidAmountEdt = findViewById(R.id.receivedAmountFill);
         //mConfirmReceipt = findViewById(R.id.printReceiptBtn);
@@ -91,13 +94,44 @@ public class receipt extends BaseActivity implements IFFirebaseLoadComplete {
         mClienpaidamntview = (TextView) findViewById(R.id.client_paidamnt_view);
         mConfirmentries = (Button) findViewById(R.id.confirm_entries);
         mCurrentbalance = (TextView) findViewById(R.id.current_amnt);
-        //mTest = (TextView) findViewById(R.id.test);
+        mSearchableLinear = (LinearLayout) findViewById(R.id.searchable_linear);
+        mChosenDatetxvw = (TextView) findViewById(R.id.date_txtvw);
+        mSelectDateLinearBtn = (LinearLayout) findViewById(R.id.selectable_linear);
 
-       // mTest.setText(globalDeviceDetails.getBranchname());
-        //Init Db
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        String chosendate = DateFormat.getDateInstance().format(calendar.getTime());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        chosendate = simpleDateFormat.format(calendar.getTime());
+        //mChosenDatetxvw.setText(chosendate);
         SharedPreferences sp = getApplicationContext().getSharedPreferences("DEVICE_PREFS", Context.MODE_PRIVATE);
         companyname = sp.getString("companynam","");
         branchname = sp.getString("branchnam","");
+        PaymentsRef = FirebaseDatabase.getInstance().getReference("user")
+                .child(FirebaseAuth.getInstance().getUid()).child(companyname+" payments").child(branchname);
+        PaymentsRef.keepSynced(true);
+
+        CashupsRef = FirebaseDatabase.getInstance().getReference("user").child(FirebaseAuth.getInstance().getUid())
+                .child(companyname+" cashups").child(branchname);
+        CashupsRef.keepSynced(true);
+        StatsCountRef = FirebaseDatabase.getInstance().getReference("Statistics").child("numberoftransactions");
+        StatsCountRef.keepSynced(true);
+        StatsAmountRef = FirebaseDatabase.getInstance().getReference("Statistics").child("valueoftransactions");
+        StatsAmountRef.keepSynced(true);
+
+
+        mSelectDateLinearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment datepicker = new DatedPickerFragment();
+                datepicker.show(getSupportFragmentManager(),"datepicker");
+
+
+            }
+        });
+
+        //Init Db
+
         DebtorsRef = FirebaseDatabase.getInstance().getReference("user").
         child(FirebaseAuth.getInstance().getUid()).child(companyname+ " debtors accounts").child(branchname);
         DebtorsRef.keepSynced(true);
@@ -124,67 +158,11 @@ public class receipt extends BaseActivity implements IFFirebaseLoadComplete {
         });
 
         BranchtotalizerRef = FirebaseDatabase.getInstance().getReference("user")
-                .child(FirebaseAuth.getInstance().getUid()).child(companyname + " Totalizers")
+                .child(FirebaseAuth.getInstance().getUid()).child(companyname + " cashups")
                 .child(branchname);
         BranchtotalizerRef.keepSynced(true);
 
-        BranchtotalizerRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                branchTotalizer = dataSnapshot.getValue(BranchTotalizer.class);
-                // String total = branchTotalizer.getTotalcollections();
-                // Double totaldbl = Double.parseDouble(total);
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-       /* mConfirmReceipt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                if(mPaidAmountEdt.getText().toString().isEmpty()){
-                    mPaidAmountEdt.setError("Please enter an amount");
-                }
-
-                else
-
-                {
-                    //confirm the paid amount
-                    mClienpaidamntview.setText(""+mPaidAmountEdt.getText().toString().trim());
-                    mPaidAmountEdt.setText("");
-                String quickabalance = mCurrentbalance.getText().toString().trim();
-                loanamountdig = Double.parseDouble(quickabalance);
-
-                newloanamount = (loanamountdig-(Double.parseDouble(mClienpaidamntview.getText().toString().trim())));
-                //mCurrentamount.setText(newloanamount+"");
-                Double stroredPaidamount = Double.parseDouble(storedpaidamount);
-                Double Latestpaidamount = Double.parseDouble(mClienpaidamntview.getText().toString());
-                Double newPaidamount = Latestpaidamount+stroredPaidamount;
-                String quickname = mClientnameview.getText().toString().trim();
-
-                DebtorsAccountsInfo debtorsAccountsInfo = new DebtorsAccountsInfo();
-                debtorsAccountsInfo.setLoanamount(newloanamount+"");
-                debtorsAccountsInfo.setName(quickname);
-                debtorsAccountsInfo.setPaidamount(newPaidamount.toString());
-                Debtorsref2.setValue(debtorsAccountsInfo);
-                mCurrentbalance.setText(newloanamount+"");
-                postToBranchTotalizer();
-                postToGoogleSheets();
-
-               goToPrinter();
-                }
-
-            }
-        });
-
-        */
 
 
         searchableSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -192,16 +170,15 @@ public class receipt extends BaseActivity implements IFFirebaseLoadComplete {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String clientname = searchableSpinner.getSelectedItem().toString();
                 mClientnameview.setText(clientname);
-                //create inner globala details after client name has been selected
-               // GlobalDeviceDetails globalDeviceDetails1 = (GlobalDeviceDetails) getApplicationContext() ;
-                //create inner database reference(2nd reference) after we now now the name of the client from searchable spinner
-                //Debtorsref2 = FirebaseDatabase.getInstance().getReference(companyname+ " debtors accounts").child(branchname).child(clientname);
+
+                //create inner database reference(2nd reference) after we now know the name of the client from searchable spinner
                 Debtorsref2 = FirebaseDatabase.getInstance().getReference("user")
                         .child(FirebaseAuth.getInstance().getUid()).child(companyname+ " debtors accounts").child(branchname).child(clientname);
                 Debtorsref2.keepSynced(true);
                 Debtorsref2.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        try{
                         //get the value of the debtor obcjet(derived from the Debtors info accounts class) at the database node pointed by the reference2
                         DebtorsAccountsInfo debtor = dataSnapshot.getValue(DebtorsAccountsInfo.class);
                         mCurrentbalance.setText(""+debtor.getAmountdue());
@@ -211,7 +188,22 @@ public class receipt extends BaseActivity implements IFFirebaseLoadComplete {
                         duedate = debtor.getDuedate();
                         storeddailypaidamount = debtor.getDailypaidamount();
                         storedloanamount = debtor.getLoanamount();
-                        principal = debtor.getPrincipal();
+                        principal = debtor.getPrincipal();}
+
+                        catch (Exception e){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(receipt.this);
+                            builder.setMessage("Debtors' accounts info may not yet be in existance.");
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+                            AlertDialog alert = builder.create();
+                            alert.show();
+
+
+                        }
 
                     }
 
@@ -220,6 +212,8 @@ public class receipt extends BaseActivity implements IFFirebaseLoadComplete {
 
                     }
                 });
+
+
             }
 
             @Override
@@ -254,9 +248,25 @@ public class receipt extends BaseActivity implements IFFirebaseLoadComplete {
 
                     }
 
+                    else  if (mChosenDatetxvw.getText().toString().isEmpty()){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(receipt.this);
+                        builder.setMessage("Please set the Date");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+
+
+                    }
+
                     else
 
                     {
+                        try{
                         //confirm the paid amount
                         SharedPreferences sp = getApplicationContext().getSharedPreferences("DEVICE_PREFS",Context.MODE_PRIVATE);
                         String postmanurl = sp.getString("sheetspostman","");
@@ -265,10 +275,9 @@ public class receipt extends BaseActivity implements IFFirebaseLoadComplete {
                         String quickabalance = mCurrentbalance.getText().toString().trim();
                         loanamountdig = Double.parseDouble(quickabalance);
 
-                        //newloanamount = (loanamountdig-(Double.parseDouble(mClienpaidamntview.getText().toString().trim())));
-                        //mCurrentamount.setText(newloanamount+"");
                         Double stroredPaidamount = Double.parseDouble(storedpaidamount);
                         Double Latestpaidamount = Double.parseDouble(mClienpaidamntview.getText().toString());
+                        payed = (Latestpaidamount+"");
                         Double newPaidamount = Latestpaidamount+stroredPaidamount;
                         String quickname = mClientnameview.getText().toString().trim();
                         Double loanamount = Double.parseDouble(storedloanamount);
@@ -286,24 +295,62 @@ public class receipt extends BaseActivity implements IFFirebaseLoadComplete {
                         debtorsAccountsInfo.setDisbursementdate(disbursementdate);
                         debtorsAccountsInfo.setDuedate(duedate);
                         debtorsAccountsInfo.setPrincipal(principal);
+                        recordStats(debtorsAccountsInfo);
                         Debtorsref2.setValue(debtorsAccountsInfo);
                         mCurrentbalance.setText(amountdue+"");
                         postToBranchTotalizer();
-                        if(!postmanurl.isEmpty()){
-                        postToGoogleSheets();
-                            goToPrinter();
-                        return;}
-                        else
-
-                        goToPrinter();
 
 
+                        PaymentsRef.child(mChosenDatetxvw.getText().toString()).child(debtorsAccountsInfo.getName()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                try{
+                                    Payer payer = dataSnapshot.getValue(Payer.class);
+                                    paid = payer.getPaid();
+                                    balance =payer.getBalance();
+
+                                    Double oldpaid = Double.parseDouble(paid);
+                                    Double newpaid = Latestpaidamount;
+                                    Double dobpaid = (oldpaid+newpaid);
+                                    String spaid = dobpaid.toString();
+                                    Double dobbal = Double.parseDouble(balance);
+
+                                    payer.setClientname(debtorsAccountsInfo.getName());
+                                    payer.setDuedate(duedate);
+                                    payer.setDisbursementdate(disbursementdate);
+                                    payer.setPaid(spaid);
+                                    payer.setBalance(debtorsAccountsInfo.getAmountdue());
+                                    payer.setPaymentdate(mChosenDatetxvw.getText().toString());
+                                    PaymentsRef.child(mChosenDatetxvw.getText().toString()).child(mClientnameview.getText().toString()).setValue(payer);
+
+                                }
+                                catch (Exception e){
+
+                                    //This part adds clinenames that were previously non existent in the payments ref node whe the
+                                    //paymentsref node for that specific date was created
+                                    Payer payer = new Payer();
+                                    Double newpaid = Latestpaidamount;
+                                    payer.setClientname(mClientnameview.getText().toString());
+                                    payer.setDuedate(duedate);
+                                    payer.setDisbursementdate(disbursementdate);
+                                    payer.setPaid(newpaid.toString());
+                                    payer.setBalance(debtorsAccountsInfo.getAmountdue());
+                                    payer.setPaymentdate(mChosenDatetxvw.getText().toString());
+                                    PaymentsRef.child(mChosenDatetxvw.getText().toString()).child(mClientnameview.getText().toString()).setValue(payer);
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
 
 
-
+                        goToPrinter();}
+                        catch (Exception e){}
                     }
-
-
                 }
                 catch (NumberFormatException e){
 
@@ -320,24 +367,96 @@ public class receipt extends BaseActivity implements IFFirebaseLoadComplete {
 
 
                 }
+                catch (Exception e){}
 
 
             }
         });
 
 
+
+    }
+
+    private void recordStats(DebtorsAccountsInfo debtorsAccountsInfo) {
+        StatsCountRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                try{
+                String transcount = dataSnapshot.getValue(String.class);
+                int inttranscount = Integer.parseInt(transcount);
+                int newtranscount = inttranscount+1;
+                StatsCountRef.setValue(newtranscount+"");}
+                catch (Exception e){}
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+        StatsAmountRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                try{
+                String transamount = dataSnapshot.getValue(String.class);
+                Double dobtransamount = Double.parseDouble(transamount);
+                Double dobpaidamount = Double.parseDouble(debtorsAccountsInfo.getPaidamount());
+                Double newtransamount = dobtransamount+dobpaidamount;
+                StatsAmountRef.setValue(newtransamount+"");}
+
+                catch (Exception e){}
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void postToBranchTotalizer() {
 
+        BranchtotalizerRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                try{
+                CahsupModelclass model = dataSnapshot.child(mChosenDatetxvw.getText().toString()).getValue(CahsupModelclass.class);
+               storedTotal = model.getTotalcollection();
+                Double newTotal = (Double.parseDouble(payed)+Double.parseDouble(storedTotal));
+                BranchtotalizerRef.child(mChosenDatetxvw.getText().toString()).child("totalcollection").setValue(newTotal.toString());
+                }
+                    //If the node for that date does not already exist, create it and set it
+                catch (NullPointerException e){
 
-                String storedTotal = branchTotalizer.getTotalcollections();
-                Double newTotal = (Double.parseDouble(mClienpaidamntview.getText().toString().trim())+Double.parseDouble(storedTotal));
-                branchTotalizer.setTotalcollections(newTotal.toString());
-                BranchtotalizerRef.setValue(branchTotalizer);
+                    CahsupModelclass modelclass = new CahsupModelclass();
+                    modelclass.setTotalcollection("0");
+                    modelclass.setTotalcashcogn("0");
+                    modelclass.setOther1("0");
+                    modelclass.setTrnasport("0");
+                    modelclass.setLunch("0");
+                    modelclass.setAirtime("0");
+                    modelclass.setDisbursements("0");
+                    modelclass.setOther2("0");
+                    modelclass.setCashinhand("0");
+                    modelclass.setShortfall("0");
+                    modelclass.setCashupdate(mChosenDatetxvw.getText().toString());
+                    CashupsRef.child(mChosenDatetxvw.getText().toString()).setValue(modelclass);
 
+                }
 
+                catch (Exception e){}
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
+
 
     private void postToGoogleSheets() {
         final ProgressDialog loading = ProgressDialog.show(this,"Adding Item","Please wait");
@@ -421,7 +540,91 @@ public class receipt extends BaseActivity implements IFFirebaseLoadComplete {
 
     @Override
     public void onFirebaseLoadFailure(String message) {
-        Toast.makeText(receipt.this,"Database Failure!!",Toast.LENGTH_LONG).show();
+        String error = message;
+        Toast.makeText(receipt.this,"Database Failure! "+ message,Toast.LENGTH_LONG).show();
+
+    }
+
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR,i);
+        cal.set(Calendar.MONTH,i1);
+        cal.set(Calendar.DAY_OF_MONTH,i2);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String currentDateString = simpleDateFormat.format(cal.getTime());
+        // String currentDateString = DateFormat.getDateInstance(DateFormat.MEDIUM).format(cal.getTime());
+        mChosenDatetxvw.setText(currentDateString);
+
+        DebtorsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+
+                    PaymentsRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            try{
+                            if(snapshot.child(mChosenDatetxvw.getText().toString()).exists()){
+                                return;
+                            }
+
+                            else {
+                                DebtorsAccountsInfo debtorsAccountsInfo = new DebtorsAccountsInfo();
+                                debtorsAccountsInfo.setName(ds.getValue(DebtorsAccountsInfo.class).getName());
+                                debtorsAccountsInfo.setDisbursementdate(ds.getValue(DebtorsAccountsInfo.class).getDisbursementdate());
+                                debtorsAccountsInfo.setAmountdue(ds.getValue(DebtorsAccountsInfo.class).getAmountdue());
+                                debtorsAccountsInfo.setDuedate(ds.getValue(DebtorsAccountsInfo.class).getDuedate());
+                                /* Please note for the rest of your life to get an oject from firebase first SET the values of the objct by*/
+
+
+                                Payer payer = new Payer();
+                                String zeroamount = "0";
+                                payer.setClientname(debtorsAccountsInfo.getName());
+                                payer.setDisbursementdate(debtorsAccountsInfo.getDisbursementdate());
+                                payer.setBalance(debtorsAccountsInfo.getAmountdue());
+                                payer.setDuedate(debtorsAccountsInfo.getDuedate());
+                                payer.setPaid(zeroamount);
+                                payer.setPaymentdate(mChosenDatetxvw.getText().toString());
+                                PaymentsRef.child(mChosenDatetxvw.getText().toString()).child(debtorsAccountsInfo.getName()).setValue(payer);
+
+                                CahsupModelclass modelclass = new CahsupModelclass();
+                                modelclass.setTotalcollection("0");
+                                modelclass.setTotalcashcogn("0");
+                                modelclass.setOther1("0");
+                                modelclass.setTrnasport("0");
+                                modelclass.setLunch("0");
+                                modelclass.setAirtime("0");
+                                modelclass.setDisbursements("0");
+                                modelclass.setOther2("0");
+                                modelclass.setCashinhand("0");
+                                modelclass.setShortfall("0");
+                                modelclass.setCashupdate(mChosenDatetxvw.getText().toString());
+                                CashupsRef.child(mChosenDatetxvw.getText().toString()).setValue(modelclass);
+
+                            }}
+
+                            catch (Exception e){
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 }

@@ -3,7 +3,6 @@ package com.tafrica.mopapov2.ClientsMenuItems;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +14,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.tafrica.mopapov2.AccountsMenuItems.DebtorsAccountsModel.DebtorsAccountsInfo;
 import com.tafrica.mopapov2.BaseActivity;
 import com.tafrica.mopapov2.R;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class verification extends BaseActivity {
     EditText name,IDnum,cellnum,address,grpname,collat,nxtKinName,nxtKinaddrss,nextkincell;
@@ -55,37 +59,8 @@ public class verification extends BaseActivity {
         Btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                                                //On clicking the save button set the Field values to the entered text in the fields, This utilises the Client.java file/class
-                client.setName(name.getText().toString().trim());
-                client.setIdnum(IDnum.getText().toString().trim());
-                client.setCellNum(cellnum.getText().toString().trim());
-                client.setAddress(address.getText().toString().trim());
-                client.setGroupName(grpname.getText().toString().trim());
-                client.setCollateral(collat.getText().toString().trim());
-                client.setNxtKinName(nxtKinName.getText().toString().trim());
-                client.setNxtKinAddrss(nxtKinaddrss.getText().toString().trim());
-                client.setNxtKinCell(nextkincell.getText().toString().trim());
-                //if any of the input fields is empty show error message on the respective field else get the user input and save the client details to firebase database
-                if(!TextUtils.isEmpty(client.getName())  && !TextUtils.isEmpty(client.getIdnum()) && !TextUtils.isEmpty(client.getCellNum() )
-                        && !TextUtils.isEmpty(client.getAddress()) && !TextUtils.isEmpty(client.getGroupName() ) &&
-                        !TextUtils.isEmpty(client.getCollateral() )&& !TextUtils.isEmpty(client.getNxtKinName() ) &&!TextUtils.isEmpty(client.getNxtKinAddrss())
-                        &&!TextUtils.isEmpty(client.getNxtKinCell() ))
-                    {
 
-
-                        reff.child(name.getText().toString().trim()).setValue(client);
-                //reff.child(name.getText().toString().trim()).setValue(client);
-                Toast.makeText(verification.this,"Client added successfully",Toast.LENGTH_LONG).show();
-                setLoanDetails(name);//Call the set loan details method here--it gets tha name(of the client and loan amount(which is zero and sets the details
-                        //In debtors accounts database reference
-                name.setText("");IDnum.setText("");cellnum.setText("");address.setText("");grpname.setText("");collat.setText("");//Clearing all text fields for user to enter next details
-                nxtKinName.setText("");nxtKinaddrss.setText("");nextkincell.setText("");name.requestFocus();
-                                                    //startActivity( new Intent(verification.this,clients.class));// go back to clients menu view
-
-
-                    }
-                                                    //Show error message if any field  is empty
-                else if (name.length()==0){name.setError("Enter Name");} //[Changed to show .setError for each Field---Toast.makeText(verification.this,"Field is empty!",Toast.LENGTH_LONG).show();]
+                if (name.length()==0){name.setError("Enter Name");} //[Changed to show .setError for each Field---Toast.makeText(verification.this,"Field is empty!",Toast.LENGTH_LONG).show();]
                 else if (IDnum.length()==0){IDnum.setError("Enter ID number");}
                 else if (cellnum.length()==0){cellnum.setError("Enter Cell number");}
                 else if (address.length()==0){address.setError("Enter Address");}
@@ -95,6 +70,49 @@ public class verification extends BaseActivity {
                 else if (nxtKinaddrss.length()==0){nxtKinaddrss.setError("Enter next of kin's address");}
                 else if (nextkincell.length()==0){nextkincell.setError("Enter next of kin's cell number");}
 
+                else {
+                    //On clicking the save button set the Field values to the entered text in the fields, This utilises the Client.java file/class
+                    String clientname = name.getText().toString().trim();
+                    client.setName(clientname);
+                    client.setIdnum(IDnum.getText().toString());
+                    client.setCellNum(cellnum.getText().toString());
+                    client.setAddress(address.getText().toString());
+                    client.setGroupName(grpname.getText().toString());
+                    client.setCollateral(collat.getText().toString());
+                    client.setNxtKinName(nxtKinName.getText().toString());
+                    client.setNxtKinAddrss(nxtKinaddrss.getText().toString());
+                    client.setNxtKinCell(nextkincell.getText().toString());
+
+
+                    //if any of the input fields is empty show error message on the respective field else get the user input and save the client details to firebase database
+               /* if(!TextUtils.isEmpty(client.getName())  && !TextUtils.isEmpty(client.getIdnum()) && !TextUtils.isEmpty(client.getCellNum() )
+                        && !TextUtils.isEmpty(client.getAddress()) && !TextUtils.isEmpty(client.getGroupName() ) &&
+                        !TextUtils.isEmpty(client.getCollateral() )&& !TextUtils.isEmpty(client.getNxtKinName() ) &&!TextUtils.isEmpty(client.getNxtKinAddrss())
+                        &&!TextUtils.isEmpty(client.getNxtKinCell() ))*/
+
+
+                    reff.child(clientname).setValue(client);
+                    //reff.child(name.getText().toString().trim()).setValue(client);
+                    Toast.makeText(verification.this, "Client added successfully", Toast.LENGTH_LONG).show();
+                    setLoanDetails(name);//Call the set loan details method here--it gets tha name(of the client and loan amount(which is zero and sets the details
+                    //In debtors accounts database reference
+                    name.setText("");
+                    IDnum.setText("");
+                    cellnum.setText("");
+                    address.setText("");
+                    grpname.setText("");
+                    collat.setText("");//Clearing all text fields for user to enter next details
+                    nxtKinName.setText("");
+                    nxtKinaddrss.setText("");
+                    nextkincell.setText("");
+                    name.requestFocus();
+                    //startActivity( new Intent(verification.this,clients.class));// go back to clients menu view
+                }
+
+
+                                                    //Show error message if any field  is empty
+
+
 
             }
         });
@@ -103,21 +121,28 @@ public class verification extends BaseActivity {
     }
 
     private void setLoanDetails(EditText name) {
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        String datetoday = DateFormat.getDateInstance().format(calendar.getTime());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        datetoday = simpleDateFormat.format(calendar.getTime());
+        String clientname= name.getText().toString().trim();
+
         DebtorsAccountsInfo debtor = new DebtorsAccountsInfo();
         String loanamount="0";
         String paidamount = "0";
         String dailypaidamount="0";
         String amountdue="0";
         String principal="0";
-        String duedate ="0";
-        String disbursementdate="0";
+        String duedate =datetoday;
+        String disbursementdate=datetoday;
          DatabaseReference LoanDetailsRef,TotalizersRef;
          LoanDetailsRef= FirebaseDatabase.getInstance().getReference("user").child(FirebaseAuth.getInstance().getUid())
                  .child(companyname+" debtors accounts").child(branchname);
          LoanDetailsRef.keepSynced(true);
          TotalizersRef = FirebaseDatabase.getInstance().getReference("user").child(FirebaseAuth.getInstance().getUid());
 
-         debtor.setName(name.getText().toString());
+         debtor.setName(clientname);
          debtor.setLoanamount(loanamount);
          debtor.setPaidamount(paidamount);
          debtor.setDailypaidamount(dailypaidamount);
@@ -125,8 +150,7 @@ public class verification extends BaseActivity {
          debtor.setPrincipal(principal);
          debtor.setDuedate(duedate);
          debtor.setDisbursementdate(disbursementdate);
-         LoanDetailsRef.child(name.getText().toString()).setValue(debtor);
-         TotalizersRef.child(companyname+ " Totalizers").child(branchname).child("totalcollections").setValue("0");
+         LoanDetailsRef.child(clientname).setValue(debtor);
 
     }
 

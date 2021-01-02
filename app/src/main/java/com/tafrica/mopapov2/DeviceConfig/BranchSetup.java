@@ -44,7 +44,8 @@ public class BranchSetup extends AppCompatActivity implements IFFirebaseLoadDone
     List<BranchSetupModelClass> branchies;
 
     SharedPreferences sharedPreferences;
-    SharedPreferences sp;
+    //SharedPreferences sp;
+    String branchname;
 
 
     @Override
@@ -59,21 +60,23 @@ public class BranchSetup extends AppCompatActivity implements IFFirebaseLoadDone
         animationDrawable.start();
 
         mSavebranchsetup = (Button) findViewById(R.id.saveBranchSetupbtn) ;
-        mIndustry = (TextView) findViewById(R.id.industryTxtVw);
+        //mIndustry = (TextView) findViewById(R.id.industryTxtVw);
         mCompanyname = (TextView) findViewById(R.id.companyNameTxtVw);
         mBranchname = (TextView) findViewById(R.id.branchNameTxtVw);
         mGooglesheetspostlink = (EditText) findViewById(R.id.google_sheets_post);
+        mBranchsearchspinner = (SearchableSpinner) findViewById(R.id.groupMemberNameSpin1);
 
         sharedPreferences = getSharedPreferences("DEVICE_PREFS", Context.MODE_PRIVATE);
         SharedPreferences sp = getApplicationContext().getSharedPreferences("DEVICE_PREFS",Context.MODE_PRIVATE);
         String industryname = sp.getString("industrynam","");
         String companyname = sp.getString("companynam","");
-        mIndustry.setText(industryname);
+         branchname = sp.getString("branchnam", "");
+        //mIndustry.setText(industryname);
         mCompanyname.setText(companyname);
 
-        mBranchsearchspinner = (SearchableSpinner) findViewById(R.id.selectBranchSearchbleSpinner);
+
         //Init Db
-        mBranchesRef = FirebaseDatabase.getInstance().getReference("Branches").child(companyname+ " branches");
+        mBranchesRef = FirebaseDatabase.getInstance().getReference("Branches").child(companyname+" branches");
         mBranchesRef.keepSynced(true);
         //Init interface
         ifFirebaseLoadDoneBranchSetup = this;
@@ -101,7 +104,7 @@ public class BranchSetup extends AppCompatActivity implements IFFirebaseLoadDone
         mBranchsearchspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String branchname = mBranchsearchspinner.getSelectedItem().toString();
+                 branchname = mBranchsearchspinner.getSelectedItem().toString();
                 mBranchname.setText(branchname);
             }
 
@@ -139,7 +142,8 @@ public class BranchSetup extends AppCompatActivity implements IFFirebaseLoadDone
                 editor.putString("sheetspostman",postmanurl);
                 editor.commit();
                 Toast.makeText(BranchSetup.this,"Branch details saved successfully",Toast.LENGTH_SHORT).show();
-                openUserLogin();}
+                openUserLogin();
+                finish();}
             }
         });
 
@@ -151,6 +155,7 @@ public class BranchSetup extends AppCompatActivity implements IFFirebaseLoadDone
 
         Intent intent = new Intent(this, Login1.class);
         startActivity(intent);
+        finish();
     }
 
 

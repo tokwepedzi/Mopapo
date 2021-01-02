@@ -55,7 +55,7 @@
         android:id="@+id/setupDvcTxtVw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="2dp"
         android:text="...lets set up your device."
         android:layout_gravity="center"
         android:textColor="#FFFFFF"
@@ -63,38 +63,61 @@
         android:textSize="12sp"
         />
 
-    <Button
+    <!--<Button
         android:id="@+id/selectIndstryBtn"
         android:layout_width="210dp"
         android:layout_height="50dp"
         android:text="Select your industry"
         android:textColor="#000000"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="5dp"/>-->
 
-    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-        android:id="@+id/selectOrgSearchbleSpinner"
-        android:layout_width="210dp"
-        android:layout_height="40dp"
+    <LinearLayout
+        android:id="@+id/searchable_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:background="#FFFF"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/round_hollow_borders">
 
-        app:hintText="Select your organization" />
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/groupMemberNameSpin1"
+            android:layout_width="295dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:outlineSpotShadowColor="@color/colorPrimaryDark"
+            android:textAlignment="center"
+            android:textSize="8sp"
+            app:hintText="Click to find your organization" />
+
+        <ImageView
+            android:id="@+id/search_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingRight="10dp"
+            android:layout_weight="1"
+            app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/new_org_register_txtvw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="10dp"
         android:layout_gravity="center"
-        android:text="NEW ORGANIZATION? REGISTER HERE"/>
+        android:layout_marginStart="10dp"
+        android:textSize="15sp"
+        android:layout_marginTop="30dp"
+        android:text="NEW ORGANIZATION? REGISTER HERE"
+        android:textColor="@android:color/holo_red_dark" />
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="20dp"
         android:text="Industry:"
         android:layout_marginStart="10dp"
         android:textColor="#FFFFFF"
@@ -103,10 +126,10 @@
     <TextView
         android:id="@+id/industryTxtVw"
         android:layout_width="300dp"
-        android:layout_height="35dp"
+        android:layout_height="30dp"
         android:layout_marginStart="10dp"
         android:textSize="20sp"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF"/>-->
 
 
 
@@ -117,7 +140,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:text="Company:"
         android:textColor="#FFFFFF"
         android:layout_marginStart="10dp"
@@ -125,7 +148,7 @@
     <TextView
         android:id="@+id/companyNameTxtVw"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:layout_marginStart="10dp"
         android:textSize="20sp"
         android:textColor="#FFFFFF"/>
@@ -138,6 +161,38 @@
         android:layout_gravity="center"
         android:text="Next"
         android:layout_marginTop="5dp"/>
+    <TextView
+        android:id="@+id/versio_welcome_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"/>
+
+    <LinearLayout
+        android:id="@+id/contact_support_wlcm"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/whatsapp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:text="Contact support"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 
 </LinearLayout>

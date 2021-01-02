@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dis_linear"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_margin="3dp">
+
+
+    <TextView
+        android:id="@+id/client_name_lstvw_item"
+        android:layout_width="88dp"
+        android:textSize="12sp"
+        android:layout_height="35dp"
+         />
+
+    <TextView
+        android:id="@+id/disbursementdate_lstvw_item"
+        android:layout_width="84dp"
+        android:textSize="12sp"
+        android:layout_height="35dp"
+         />
+
+    <!--<TextView
+        android:id="@+id/due_date_lstvw_item"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:textAlignment="center" />-->
+
+    <TextView
+        android:id="@+id/amount_lstvw_item"
+        android:layout_width="88dp"
+        android:textSize="12sp"
+        android:layout_height="35dp" />
+    <TextView
+        android:id="@+id/amount_with_interest_lstvw_item"
+        android:layout_width="88dp"
+        android:textSize="12sp"
+        android:layout_height="35dp"/>
+
+</LinearLayout>

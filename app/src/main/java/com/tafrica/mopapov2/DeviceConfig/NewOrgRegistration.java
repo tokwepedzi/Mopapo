@@ -12,14 +12,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.tafrica.mopapov2.Companycontact;
 import com.tafrica.mopapov2.R;
 
 public class NewOrgRegistration extends AppCompatActivity {
 
     EditText mCompanyname,mBranchname,mCompanyaddress,mContactperson,mContactnumber,mEmailaddress;
     Button mSaveOrgdetailsbutton;
-    String companyname,branchname;
-    DatabaseReference CompaniesRef,BranchesRef;
+    String companyname,branchname,companyaddress,contactname,cellnumber,email;
+    DatabaseReference CompaniesRef,BranchesRef,NewOrgDetailsRef;
+
 
 
 
@@ -39,6 +41,8 @@ public class NewOrgRegistration extends AppCompatActivity {
         CompaniesRef.keepSynced(true);
         BranchesRef = FirebaseDatabase.getInstance().getReference("Branches");
         BranchesRef.keepSynced(true);
+        NewOrgDetailsRef = FirebaseDatabase.getInstance().getReference("Contacts");
+        NewOrgDetailsRef.keepSynced(true);
 
         mSaveOrgdetailsbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,8 +55,22 @@ public class NewOrgRegistration extends AppCompatActivity {
                     mBranchname.setError("Branch name  is required");
                 }
                 else{
+                    try{
+
                 companyname = mCompanyname.getText().toString().trim();
                 branchname = mBranchname.getText().toString().trim();
+                companyaddress = mCompanyaddress.getText().toString();
+                contactname = mContactperson.getText().toString();
+                cellnumber = mContactnumber.getText().toString();
+                email = mEmailaddress.getText().toString();
+                Companycontact companycontact = new Companycontact();
+                companycontact.setCompanyname(companyname);
+                companycontact.setBranchname(branchname);
+                companycontact.setAddress(companyaddress);
+                companycontact.setContactname(contactname);
+                companycontact.setCellnumber(cellnumber);
+                companycontact.setEmailaddress(email);
+                NewOrgDetailsRef.child(companyname).child(branchname).setValue(companycontact);
                 CompaniesRef.child(companyname).child("companyname").setValue(companyname);
                 BranchesRef.child(companyname+" branches").child(branchname).child("branchname").setValue(branchname);
                 DatabaseReference TotalizersRef;
@@ -60,6 +78,8 @@ public class NewOrgRegistration extends AppCompatActivity {
                 TotalizersRef.keepSynced(true);
                 TotalizersRef.child(companyname+ " Totalizers").child(branchname).child("totalcollections").setValue("0");
                 Toast.makeText(NewOrgRegistration.this,"Company details added successfully",Toast.LENGTH_LONG).show();
+                //String company = mCompanyname.getText().toString();
+
                 mCompanyname.setText("");
                 mBranchname.setText("");
                 mCompanyaddress.setText("");
@@ -67,7 +87,15 @@ public class NewOrgRegistration extends AppCompatActivity {
                 mContactnumber.setText("");
                 mEmailaddress.setText("");
                 mCompanyname.requestFocus();
-                goToSetup();}
+                goToSetup();
+                finish();
+                    }
+
+                    catch (Exception e){
+                       Toast.makeText(NewOrgRegistration.this, "Error"+e.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+
+                }
 
             }
         });
@@ -79,6 +107,7 @@ public class NewOrgRegistration extends AppCompatActivity {
 
         Intent intent = new Intent(this, WelcomenSetup.class);
         startActivity(intent);
+        finish();
     }
 
 
