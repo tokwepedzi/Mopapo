@@ -89,6 +89,14 @@
             android:orientation="horizontal"
             android:layout_marginTop="25dp"
             android:background="@drawable/round_hollow_borders">
+            <ImageView
+                android:id="@+id/search_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingStart="10dp"
+                android:layout_weight="1"
+                app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
 
             <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:id="@+id/groupMemberNameSpin1"
@@ -96,19 +104,13 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:clickable="true"
                 android:outlineSpotShadowColor="@color/colorPrimaryDark"
                 android:textAlignment="center"
                 android:textSize="18sp"
-                app:hintText="Click to search clients" />
+                app:hintText="Search clients" />
 
-            <ImageView
-                android:id="@+id/search_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingRight="20dp"
-                android:layout_weight="1"
-                app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
+
 
         </LinearLayout>
 

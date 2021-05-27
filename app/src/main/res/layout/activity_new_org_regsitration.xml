@@ -12,8 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="22sp"
-        android:text="Company details" />
+        android:textSize="25sp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:text="Company Details" />
 
 
 

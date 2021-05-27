@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
 
     <application
         android:name=".DeviceConfig.GlobalDeviceDetails"
@@ -15,43 +17,55 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AccountsMenuItems.CashManager"
+        <activity
+            android:name=".AccountsMenuItems.CashManager"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"></activity>
-        <activity android:name=".ReportsMenuItems.Cashup_report"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ReportsMenuItems.Cashup_report"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".DisbursementsReports"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".DisbursementsReports"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".EditProfPic"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".EditProfPic"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".EditClientInfo"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".EditClientInfo"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".NinetyPluslistview"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".NinetyPluslistview"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".SixtyPluslistview"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".SixtyPluslistview"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".ThirtyPluslistview"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ThirtyPluslistview"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".CurrentListview"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".CurrentListview"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".AgingReports"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".AgingReports"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".ReportsMenu"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ReportsMenu"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="LockedOrientationActivity" />
         <activity android:name=".FinancialSatetements" />
-        <activity android:name=".Collectionsetup"
+        <activity
+            android:name=".Collectionsetup"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".DeviceConfig.NewOrgRegistration"
             android:screenOrientation="portrait"
@@ -75,7 +89,6 @@
         <activity
             android:name=".ClientsMenuItems.clientsview"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ClientsMenuItems.verification"
@@ -84,7 +97,7 @@
         <activity
             android:name=".mopapo_offline_enabler"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="Instantiatable,LockedOrientationActivity" />
         <activity
             android:name=".AccountsMenuItems.cashup"
             android:screenOrientation="portrait"

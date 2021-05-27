@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -62,12 +61,12 @@ public class WelcomenSetup extends AppCompatActivity implements IFFirebaseLoadDo
         setContentView(R.layout.activity_welcomen_setup);
 
 
-        fadingTextView = findViewById(R.id.welcome_faingMsgTxtVw);
-        LinearLayout linearLayout = findViewById(R.id.welcome_layout);
-        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
-        animationDrawable.setEnterFadeDuration(2000);
-        animationDrawable.setExitFadeDuration(3500);
-        animationDrawable.start();
+        //fadingTextView = findViewById(R.id.welcome_faingMsgTxtVw);
+        //LinearLayout linearLayout = findViewById(R.id.welcome_layout);
+       // AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
+        //animationDrawable.setEnterFadeDuration(2000);
+        //animationDrawable.setExitFadeDuration(3500);
+        //animationDrawable.start();
 
         //mSelectyrindustry = (Button) findViewById(R.id.selectIndstryBtn);
         mNextbtn = (Button) findViewById(R.id.setupScreenNextBtn);

@@ -7,5 +7,6 @@
     <color name="colorThirtyPlus">#c1cd32</color>
     <color name="colorSixtyPlus">#ff9500</color>
     <color name="colorNinetyPlus">#ff3232</color>
+    <color name="mygray">#C0C0C0</color>
 
 </resources>

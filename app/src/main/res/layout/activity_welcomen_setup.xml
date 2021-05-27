@@ -1,66 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_list"
+    android:background="@android:color/white"
     android:id="@+id/welcome_layout"
-    android:orientation="vertical"
+
     tools:context=".DeviceConfig.WelcomenSetup">
 
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/welcomeMsgCrdVw"
-        android:layout_width="427dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="1dp"
-        app:cardBackgroundColor="#FFEBEE"
-        app:cardCornerRadius="35dp">
-
-        <RelativeLayout
-            android:id="@+id/WelcomeMsgRelLyot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <com.tomer.fadingtextview.FadingTextView
-                android:id="@+id/welcome_faingMsgTxtVw"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Welcome!"
-                android:textColor="#3549BC"
-                android:textSize="22sp"
-                app:texts="@array/setup_welcome"
-                app:timeout="2000" />
-
-            <!--<TextView
-                android:id="@+id/welcomeMsgTxtVw"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Welcome!"
-                android:textColor="#3549BC"
-                android:textSize="30sp" />-->
-
-        </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
 
-    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/setupDvcTxtVw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:text="...lets set up your device."
+        android:layout_marginTop="10dp"
+        android:text="Device Setup"
         android:layout_gravity="center"
-        android:textColor="#FFFFFF"
+        android:textColor="@android:color/black"
         android:textAlignment="center"
-        android:textSize="12sp"
+        android:textSize="25sp"
+       android:textStyle="bold"
         />
 
     <!--<Button
@@ -78,10 +45,21 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/round_hollow_borders">
+        <ImageView
+            android:id="@+id/search_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingRight="10dp"
+            android:paddingStart="10dp"
+            android:layout_weight="1"
+            app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
+
 
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+
             android:id="@+id/groupMemberNameSpin1"
             android:layout_width="295dp"
             android:layout_height="50dp"
@@ -90,16 +68,8 @@
             android:outlineSpotShadowColor="@color/colorPrimaryDark"
             android:textAlignment="center"
             android:textSize="8sp"
-            app:hintText="Click to find your organization" />
+            app:hintText="Search for your organization" />
 
-        <ImageView
-            android:id="@+id/search_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingRight="10dp"
-            android:layout_weight="1"
-            app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
 
     </LinearLayout>
 
@@ -110,9 +80,10 @@
         android:layout_gravity="center"
         android:layout_marginStart="10dp"
         android:textSize="15sp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"
         android:text="NEW ORGANIZATION? REGISTER HERE"
-        android:textColor="@android:color/holo_red_dark" />
+        android:textColor="@android:color/black" />
 
     <!--<TextView
         android:layout_width="wrap_content"
@@ -160,22 +131,18 @@
         android:layout_height="55dp"
         android:layout_gravity="center"
         android:text="Next"
-        android:layout_marginTop="5dp"/>
-    <TextView
-        android:id="@+id/versio_welcome_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="20dp" />
+
 
     <LinearLayout
+
         android:id="@+id/contact_support_wlcm"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="2dp"
-        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal"
         android:layout_marginEnd="8dp"
         android:orientation="horizontal">
 
@@ -189,13 +156,24 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
-            android:text="Contact support"
-            android:textColor="@android:color/white"
+            android:text="Need help? Contact support"
+            android:textColor="@android:color/black"
             android:textSize="18sp" />
+    </LinearLayout>
+        <TextView
+            android:id="@+id/versio_welcome_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:textSize="18sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"/>
+
     </LinearLayout>
 
 
-</LinearLayout>
+
+</ScrollView>
 
 
 

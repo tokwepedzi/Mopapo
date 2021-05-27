@@ -1,17 +1,23 @@
 package com.tafrica.mopapov2.Printing;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.mazenrashed.printooth.Printooth;
 import com.mazenrashed.printooth.data.printable.Printable;
@@ -41,12 +47,54 @@ public class MopapoPrinter extends BaseActivity implements PrintingCallback {
     String companyname;
     SwitchCompat mSwitch;
     SharedPreferences sp;
+    private Dialog dialog;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mopapo_printer);
+        dialog = new Dialog(MopapoPrinter.this);
+        dialog.setContentView(R.layout.permission_request_layout);
+        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_bg));
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+        if(ContextCompat.checkSelfPermission(MopapoPrinter.this,Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED){
+            dialog.show();
+        }
+
+
+        Button okay = dialog.findViewById(R.id.permission_gran_btn);
+        Button cancel = dialog.findViewById(R.id.permission_deny_btn);
+
+        okay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(
+                        MopapoPrinter.this,
+                        new String[]
+                                {
+                                        Manifest.permission.ACCESS_FINE_LOCATION,
+                                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                                        Manifest.permission.BLUETOOTH,
+                                        Manifest.permission.BLUETOOTH_ADMIN,
+                                        Manifest.permission.BLUETOOTH_PRIVILEGED,
+                                        Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                                        Manifest.permission.READ_EXTERNAL_STORAGE
+                                },0);
+                dialog.dismiss();
+            return;
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MopapoPrinter.this,receipt.class));
+                finish();
+            }
+        });
         Intent intent = getIntent();
         String clientname = intent.getStringExtra(receipt.CLIENT_NAME);
         String paidamount = intent.getStringExtra(receipt.PAID_AMOUNT);

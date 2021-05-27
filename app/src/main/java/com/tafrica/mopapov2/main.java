@@ -32,7 +32,7 @@ import java.util.Date;
 
 public class main extends BaseActivity {
 
-    RelativeLayout rlbtn1,rlbtn2,rlbtn3,rlbtn4,rlbtn5;
+    RelativeLayout receiptBtn, accountsBtn, clientsBtn, reportsBtn, deviceConfigBtn;
     TextView mVersionName,mCompanyname,mLicenseKey;
     SharedPreferences sharedPreferences;
     DatabaseReference VersioNameRef,LicensingRef,AddCapitalRef,LiquidAccountRef,CashWithdrawalRef,TrialperiodRef,SupportRef,SupportRef1;
@@ -44,11 +44,11 @@ public class main extends BaseActivity {
         setContentView(R.layout.activity_main);
         GlobalDeviceDetails globalDeviceDetails = (GlobalDeviceDetails) getApplicationContext();
 
-        rlbtn1 = (RelativeLayout) findViewById(R.id.receiptBtn);
-        rlbtn2 = (RelativeLayout) findViewById(R.id.accountsBtn);
-        rlbtn3 = (RelativeLayout) findViewById(R.id.clientsBtn);
-        rlbtn4 = (RelativeLayout) findViewById(R.id.reportsBtn);
-        rlbtn5 = (RelativeLayout) findViewById(R.id.deviceConfigBtn);
+        receiptBtn = (RelativeLayout) findViewById(R.id.receiptBtn);
+        accountsBtn = (RelativeLayout) findViewById(R.id.accountsBtn);
+        clientsBtn = (RelativeLayout) findViewById(R.id.clientsBtn);
+        reportsBtn = (RelativeLayout) findViewById(R.id.reportsBtn);
+        deviceConfigBtn = (RelativeLayout) findViewById(R.id.deviceConfigBtn);
         mVersionName = (TextView) findViewById(R.id.version_name);
        // mCompanyname = (TextView) findViewById(R.id.company_name);
         mLicenseKey = (TextView) findViewById(R.id.license_key);
@@ -262,6 +262,7 @@ public class main extends BaseActivity {
                            @Override
                            public void onClick(DialogInterface dialogInterface, int i) {
                                startActivity(new Intent(getApplicationContext(), Login1.class));
+                               finish();
                            }
                        });
                        AlertDialog alert = builder.create();
@@ -365,28 +366,28 @@ public class main extends BaseActivity {
         });
 
 
-        rlbtn1.setOnClickListener(new View.OnClickListener() {
+        receiptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openRcptScreen();
             }
         });
 
-        rlbtn2.setOnClickListener(new View.OnClickListener() {
+        accountsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openAccntsMenu();
             }
         });
 
-        rlbtn3.setOnClickListener(new View.OnClickListener() {
+        clientsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openClientsScreen();
             }
         });
 
-        rlbtn4.setOnClickListener(new View.OnClickListener() {
+        reportsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -394,7 +395,7 @@ public class main extends BaseActivity {
             }
         });
 
-        rlbtn5.setOnClickListener(new View.OnClickListener() {
+        deviceConfigBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openDeviceConfgScreen();

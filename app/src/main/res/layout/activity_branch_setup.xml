@@ -17,6 +17,14 @@
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:background="@drawable/round_hollow_borders">
+        <ImageView
+            android:id="@+id/search_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingStart="10dp"
+            android:layout_weight="1"
+            app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
 
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
             android:id="@+id/groupMemberNameSpin1"
@@ -27,16 +35,9 @@
             android:outlineSpotShadowColor="@color/colorPrimaryDark"
             android:textAlignment="center"
             android:textSize="8sp"
-            app:hintText="Click to find your branch" />
+            app:hintText="Search for your branch name" />
 
-        <ImageView
-            android:id="@+id/search_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingRight="10dp"
-            android:layout_weight="1"
-            app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
+
 
     </LinearLayout>
 

@@ -127,15 +127,15 @@
         android:textSize="18sp" />
     <Button
     android:id="@+id/pair_with_printer_rcpt"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="200dp"
+    android:layout_height="60dp"
     android:layout_gravity="center"
     android:layout_marginTop="30dp"
     android:text="Pair with pinter"/>
     <Button
         android:id="@+id/print_rcpt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:text="Print receipt"/>

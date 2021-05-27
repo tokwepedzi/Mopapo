@@ -4,4 +4,12 @@
         <item>Add Capital</item>
         <item>Withdraw Cash</item>
     </string-array>
+    <string name="Already_registered">Already Registered? Login Here</string>
+    <string name="tems_and_condtions">By continuing, I confirm that I have read, understood and agree to Terms and Conditions and MOPAPO"'"s Privacy Policy</string>
+    <string name="permission_request">This app requires location and Bluetooth permission to perform any Bluetooth communication, such as requesting a connection, accepting a connection, and transferring data.
+        Because discoverable devices might reveal information about the user location, the device discovery process requires location access. Your device
+    location will be in use in the background (when the app is closed) to ensure continuous connection with the closest printer</string>
+    <string name="confirm_btn">CONFIRM</string>
+    <string name="setup_short_code">Set Up 4 digit PIN to login quicker next time</string>
+    <string name="enter_short_code">Enter Your PIN to login</string>
 </resources>

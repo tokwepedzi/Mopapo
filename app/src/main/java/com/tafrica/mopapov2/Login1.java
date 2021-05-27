@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -66,6 +67,7 @@ public class Login1 extends AppCompatActivity {
         mEmail.setText(email);
         mPassword.requestFocus();
         firebaseAuth =FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
         SupportRef = FirebaseDatabase.getInstance().getReference("Support").child("email");
         SupportRef.keepSynced(true);
@@ -144,6 +146,7 @@ public class Login1 extends AppCompatActivity {
                             mLoadingBar.hide();
                             startActivity(new Intent(getApplicationContext(), main.class));
                             Toast.makeText(Login1.this,"Login Successful.",Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                         else
                         {
@@ -165,6 +168,7 @@ public class Login1 extends AppCompatActivity {
                 editor.putString("requestreset",reset);
                 editor.commit();
                 startActivity(new Intent(getApplicationContext(), Register.class));
+                finish();
             }
         });
 
